@@ -1,0 +1,29 @@
+Manifest-Version: 1.0
+Bnd-LastModified: 1426792320109
+Build-Jdk: 1.7.0_75
+Built-By: meatcar
+Bundle-Description: API to retrieve Active Installs ping data
+Bundle-DocURL: http://xwiki.org/
+Bundle-License: http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html
+Bundle-ManifestVersion: 2
+Bundle-Name: XWiki Platform - Active Installs - Server - API
+Bundle-SymbolicName: org.xwiki.platform.xwiki-platform-activeinstalls-se
+ rver-api
+Bundle-Vendor: XWiki
+Bundle-Version: 7.0.0.SNAPSHOT
+Created-By: Apache Maven Bundle Plugin
+Export-Package: org.xwiki.activeinstalls.server;uses:="org.xwiki.compone
+ nt.annotation,com.google.gson";version="7.0.0.SNAPSHOT",org.xwiki.activ
+ einstalls.server.script;uses:="org.xwiki.activeinstalls.server,org.xwik
+ i.context,org.xwiki.component.annotation,org.xwiki.script.service,javax
+ .inject,com.google.gson";version="7.0.0.SNAPSHOT"
+Import-Package: com.google.gson;version="[2.2,3)",io.searchbox,io.search
+ box.client,io.searchbox.core,io.searchbox.params,javax.inject,org.xwiki
+ .activeinstalls.internal,org.xwiki.activeinstalls.server;version="[7.0,
+ 8)",org.xwiki.component.annotation;version="[7.0,8)",org.xwiki.context;
+ version="[7.0,8)",org.xwiki.properties;version="[7.0,8)",org.xwiki.scri
+ pt.service;version="[7.0,8)"
+Originally-Created-By: Apache Maven Bundle Plugin
+Tool: Bnd-1.50.0
+XWiki-Extension-Id: org.xwiki.platform:xwiki-platform-activeinstalls-ser
+ ver-api

@@ -1,0 +1,42 @@
+// ------------------------------------------------------------------
+// NOTICE file containing copyrights,
+// in this case for XWiki Platform - Active Installs - Common API
+// ------------------------------------------------------------------
+
+XWiki Platform - Active Installs - Common API
+Copyright 2004-2015 XWiki
+
+This product includes/uses software developed by 'an unknown organization'
+  - Guava: Google Core Libraries for Java (http://code.google.com/p/guava-libraries/guava)
+  - Jest Apache HC Jar (https://github.com/searchbox-io/Jest)
+  - Jest Common Jar (https://github.com/searchbox-io/Jest)
+  - javax.inject (http://code.google.com/p/atinject/)
+  - ezmorph (http://ezmorph.sourceforge.net)
+
+This product includes/uses software developed by 'Google, Inc.' (http://www.google.com)
+  - Gson (http://code.google.com/p/google-gson/)
+
+This product includes/uses software developed by 'Json-lib' (http://json-lib.sourceforge.net)
+  - json-lib (http://json-lib.sourceforge.net)
+
+This product includes/uses software developed by 'QOS.ch' (http://www.qos.ch)
+  - SLF4J API Module (http://www.slf4j.org)
+
+This product includes/uses software developed by 'The Apache Software Foundation' (http://www.apache.org/)
+  - Apache Commons BeanUtils (http://commons.apache.org/proper/commons-beanutils/)
+  - Apache Commons Codec (http://commons.apache.org/proper/commons-codec/)
+  - Commons Collections (http://commons.apache.org/collections/)
+  - Commons Lang (http://commons.apache.org/lang/)
+  - Apache Commons Lang (http://commons.apache.org/proper/commons-lang/)
+  - Apache HttpAsyncClient (http://hc.apache.org/httpcomponents-asyncclient)
+  - Apache HttpClient (http://hc.apache.org/httpcomponents-client)
+  - Apache HttpCore (http://hc.apache.org/httpcomponents-core-ga)
+  - Apache HttpCore NIO (http://hc.apache.org/httpcomponents-core-ga)
+
+This product includes/uses software developed by 'XWiki' (http://xwiki.org/)
+  - XWiki Commons - Component - API (http://extensions.xwiki.org?id=org.xwiki.commons:xwiki-commons-component-api:7.0-SNAPSHOT:::/xwiki-commons-pom/xwiki-commons-core/xwiki-commons-component/xwiki-commons-component-api)
+  - XWiki Commons - Configuration - API (http://extensions.xwiki.org?id=org.xwiki.commons:xwiki-commons-configuration-api:7.0-SNAPSHOT:::/xwiki-commons-pom/xwiki-commons-core/xwiki-commons-configuration/xwiki-commons-configuration-api)
+  - XWiki Commons - Stability (http://extensions.xwiki.org?id=org.xwiki.commons:xwiki-commons-stability:7.0-SNAPSHOT:::/xwiki-commons-pom/xwiki-commons-core/xwiki-commons-stability)
+  - XWiki Commons - Text (http://extensions.xwiki.org?id=org.xwiki.commons:xwiki-commons-text:7.0-SNAPSHOT:::/xwiki-commons-pom/xwiki-commons-core/xwiki-commons-text)
+
+

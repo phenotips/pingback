@@ -1,0 +1,3 @@
+org/xwiki/activeinstalls/internal/server/DefaultDataManager.class
+org/xwiki/activeinstalls/server/script/ActiveInstallsScriptService.class
+org/xwiki/activeinstalls/server/DataManager.class

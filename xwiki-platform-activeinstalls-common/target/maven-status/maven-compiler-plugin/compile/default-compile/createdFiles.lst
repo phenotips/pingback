@@ -1,0 +1,5 @@
+org/xwiki/activeinstalls/internal/DefaultActiveInstallsConfiguration.class
+org/xwiki/activeinstalls/internal/XWikiJestClientFactory.class
+org/xwiki/activeinstalls/internal/DefaultJestClientManager.class
+org/xwiki/activeinstalls/ActiveInstallsConfiguration.class
+org/xwiki/activeinstalls/internal/JestClientManager.class

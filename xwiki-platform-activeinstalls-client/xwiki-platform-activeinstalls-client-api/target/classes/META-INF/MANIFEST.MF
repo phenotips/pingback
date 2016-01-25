@@ -1,0 +1,33 @@
+Manifest-Version: 1.0
+Bnd-LastModified: 1453501455107
+Build-Jdk: 1.8.0_72
+Built-By: meatcar
+Bundle-Description: API to store instance UUID and send regular pings no
+ tifying that the instance is alive
+Bundle-DocURL: http://xwiki.org/
+Bundle-License: http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html
+Bundle-ManifestVersion: 2
+Bundle-Name: XWiki Platform - Active Installs - Client - API
+Bundle-SymbolicName: org.xwiki.platform.xwiki-platform-activeinstalls-cl
+ ient-api
+Bundle-Vendor: XWiki
+Bundle-Version: 7.4.1.SNAPSHOT
+Created-By: Apache Maven Bundle Plugin
+Import-Package: com.xpn.xwiki;version="[7.4,8)",com.xpn.xwiki.store;vers
+ ion="[7.4,8)",com.xpn.xwiki.util;version="[7.4,8)",io.searchbox,io.sear
+ chbox.client,io.searchbox.core,io.searchbox.indices,io.searchbox.indice
+ s.mapping,io.searchbox.params,javax.inject,javax.servlet;version="[3.0,
+ 4)",net.sf.json,org.apache.commons.lang;version="[2.6,3)",org.apache.co
+ mmons.lang.exception;version="[2.6,3)",org.slf4j;version="[1.7,2)",org.
+ xwiki.activeinstalls,org.xwiki.activeinstalls.internal,org.xwiki.bridge
+ .event;version="[7.4,8)",org.xwiki.component.annotation;version="[7.4,8
+ )",org.xwiki.context;version="[7.4,8)",org.xwiki.environment;version="[
+ 7.4,8)",org.xwiki.environment.internal,org.xwiki.extension;version="[7.
+ 4,8)",org.xwiki.extension.repository;version="[7.4,8)",org.xwiki.extens
+ ion.version;version="[7.4,8)",org.xwiki.instance;version="[7.4,8)",org.
+ xwiki.observation;version="[7.4,8)",org.xwiki.observation.event;version
+ ="[7.4,8)"
+Require-Capability: osgi.ee;filter:="(&(osgi.ee=JavaSE)(version=1.7))"
+Tool: Bnd-2.3.0.201405100607
+XWiki-Extension-Id: org.xwiki.platform:xwiki-platform-activeinstalls-cli
+ ent-api

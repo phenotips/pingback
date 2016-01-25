@@ -1,0 +1,25 @@
+Manifest-Version: 1.0
+Bnd-LastModified: 1426792315677
+Build-Jdk: 1.7.0_75
+Built-By: meatcar
+Bundle-Description: API common to both client and server modules
+Bundle-DocURL: http://xwiki.org/
+Bundle-License: http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html
+Bundle-ManifestVersion: 2
+Bundle-Name: XWiki Platform - Active Installs - Common API
+Bundle-SymbolicName: org.xwiki.platform.xwiki-platform-activeinstalls-co
+ mmon
+Bundle-Vendor: XWiki
+Bundle-Version: 7.0.0.SNAPSHOT
+Created-By: Apache Maven Bundle Plugin
+Export-Package: org.xwiki.activeinstalls;uses:="org.xwiki.component.anno
+ tation";version="7.0.0.SNAPSHOT"
+Import-Package: io.searchbox.client,io.searchbox.client.config,javax.inj
+ ect,org.apache.http.impl.client,org.xwiki.activeinstalls;version="[7.0,
+ 8)",org.xwiki.component.annotation;version="[7.0,8)",org.xwiki.componen
+ t.manager;version="[7.0,8)",org.xwiki.component.phase;version="[7.0,8)"
+ ,org.xwiki.configuration;version="[7.0,8)"
+Originally-Created-By: Apache Maven Bundle Plugin
+Tool: Bnd-1.50.0
+XWiki-Extension-Id: org.xwiki.platform:xwiki-platform-activeinstalls-com
+ mon

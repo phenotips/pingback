@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="5.8">
+<file name="/home/meatcar/dev/xwiki/xwiki-platform/xwiki-platform-core/xwiki-platform-activeinstalls/xwiki-platform-activeinstalls-server/xwiki-platform-activeinstalls-server-api/src/main/java/org/xwiki/activeinstalls/server/DataManager.java">
+</file>
+<file name="/home/meatcar/dev/xwiki/xwiki-platform/xwiki-platform-core/xwiki-platform-activeinstalls/xwiki-platform-activeinstalls-server/xwiki-platform-activeinstalls-server-api/src/main/java/org/xwiki/activeinstalls/server/script/ActiveInstallsScriptService.java">
+</file>
+<file name="/home/meatcar/dev/xwiki/xwiki-platform/xwiki-platform-core/xwiki-platform-activeinstalls/xwiki-platform-activeinstalls-server/xwiki-platform-activeinstalls-server-api/src/main/java/org/xwiki/activeinstalls/internal/server/DefaultDataManager.java">
+</file>
+</checkstyle>

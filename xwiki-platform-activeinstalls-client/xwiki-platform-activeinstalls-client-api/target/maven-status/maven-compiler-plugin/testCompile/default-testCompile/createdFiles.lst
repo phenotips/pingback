@@ -1,0 +1,8 @@
+org/xwiki/activeinstalls/internal/client/DatePingDataProviderTest.class
+org/xwiki/activeinstalls/internal/client/DistributionPingDataProviderTest.class
+org/xwiki/activeinstalls/internal/client/DefaultPingSenderIntegrationTest$1.class
+org/xwiki/activeinstalls/internal/client/DatabasePingDataProviderTest.class
+org/xwiki/activeinstalls/internal/client/ExtensionPingDataProviderTest.class
+org/xwiki/activeinstalls/internal/client/DefaultPingSenderTest.class
+org/xwiki/activeinstalls/internal/client/ServletContainerPingDataProviderTest.class
+org/xwiki/activeinstalls/internal/client/DefaultPingSenderIntegrationTest.class
