@@ -45,6 +45,9 @@
       </modules>
     </profile>
   </profiles>
+  <properties>
+    <xwiki.version>7.4</xwiki.version>
+  </properties>
   <dependencyManagement>
     <dependencies>
       <dependency>

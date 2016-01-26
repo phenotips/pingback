@@ -110,6 +110,7 @@
     <orderEntry type="library" scope="RUNTIME" name="Maven: org.apache.xmlgraphics:batik-codec:1.8" level="project" />
     <orderEntry type="library" name="Maven: joda-time:joda-time:2.9.1" level="project" />
     <orderEntry type="library" name="Maven: org.xwiki.platform:xwiki-platform-mail-send-api:7.4.1-SNAPSHOT" level="project" />
+    <orderEntry type="library" name="Maven: org.bouncycastle:bcprov-jdk15on:1.53" level="project" />
     <orderEntry type="library" name="Maven: javax.mail:mail:1.4.5" level="project" />
     <orderEntry type="library" name="Maven: org.xwiki.commons:xwiki-commons-script:7.4.1-SNAPSHOT" level="project" />
     <orderEntry type="library" name="Maven: org.xwiki.commons:xwiki-commons-classloader-api:7.4.1-SNAPSHOT" level="project" />
@@ -239,7 +240,6 @@
     <orderEntry type="library" name="Maven: org.opengis:geoapi:3.0.0" level="project" />
     <orderEntry type="library" name="Maven: javax.measure:jsr-275:0.9.3" level="project" />
     <orderEntry type="library" name="Maven: org.gagravarr:vorbis-java-core:0.1" level="project" />
-    <orderEntry type="library" name="Maven: org.bouncycastle:bcprov-jdk15on:1.53" level="project" />
     <orderEntry type="library" name="Maven: org.bouncycastle:bcpkix-jdk15on:1.53" level="project" />
     <orderEntry type="library" name="Maven: org.bouncycastle:bcmail-jdk15on:1.53" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Maven: de.l3s.boilerpipe:boilerpipe:1.2.0-xwiki" level="project" />

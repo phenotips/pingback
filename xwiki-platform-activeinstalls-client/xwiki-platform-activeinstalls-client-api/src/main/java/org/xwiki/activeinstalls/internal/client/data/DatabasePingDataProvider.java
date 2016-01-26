@@ -110,7 +110,7 @@ public class DatabasePingDataProvider implements PingDataProvider
     private void logWarning(String explanation, Throwable e)
     {
         this.logger.warn("{}. This information has not been added to the Active Installs ping data. Reason [{}]",
-            explanation, ExceptionUtils.getRootCauseMessage(e));
+            explanation, ExceptionUtils.getRootCauseMessage(e), e);
     }
 
     private DatabaseMetaData getDatabaseMetaData()

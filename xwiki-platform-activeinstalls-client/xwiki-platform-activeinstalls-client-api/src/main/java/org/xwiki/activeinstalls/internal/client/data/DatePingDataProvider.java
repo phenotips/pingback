@@ -128,7 +128,7 @@ public class DatePingDataProvider implements PingDataProvider
         } catch (Exception e) {
             // If this fails we just don't send this information but we still send the other piece of information.
             // However we log a warning since it's a problem that needs to be seen and looked at.
-            this.logger.warn(ERROR_MESSAGE, ExceptionUtils.getRootCauseMessage(e));
+            this.logger.warn(ERROR_MESSAGE, ExceptionUtils.getRootCauseMessage(e), e);
         }
         return jsonMap;
     }

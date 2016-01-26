@@ -97,7 +97,7 @@ public class ServletContainerPingDataProvider implements PingDataProvider
                 // However we log a warning since it's a problem that needs to be seen and looked at.
                 this.logger.warn("Failed to compute Servlet container information. "
                         + "This information has not been added to the Active Installs ping data. Reason [{}]",
-                    ExceptionUtils.getRootCauseMessage(e)
+                    ExceptionUtils.getRootCauseMessage(e), e
                 );
             }
         }

@@ -76,8 +76,9 @@ public class ActiveInstallsPingThread extends AbstractXWikiRunnable
                 // Failed to connect or send the ping to the remote Elastic Search instance, will try again after the
                 // sleep.
                 LOGGER.warn(
-                    "Failed to send Active Installation ping to [{}]. Error = [{}]. Will retry in [{}] seconds... {}",
-                    this.configuration.getPingInstanceURL(), ExceptionUtils.getRootCauseMessage(e), WAIT_TIME / 1000, e);
+                    "Failed to send Active Installation ping to [{}]. Error = [{}]. Will retry in [{}] seconds...",
+                    this.configuration.getPingInstanceURL(), ExceptionUtils.getRootCauseMessage(e), WAIT_TIME / 1000,
+                        e);
             }
             try {
                 Thread.sleep(WAIT_TIME);
