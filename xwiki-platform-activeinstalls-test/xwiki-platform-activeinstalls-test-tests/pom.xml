@@ -25,7 +25,7 @@
   <parent>
     <groupId>org.xwiki.platform</groupId>
     <artifactId>xwiki-platform-activeinstalls-test</artifactId>
-    <version>8.0-SNAPSHOT</version>
+    <version>7.1.4</version>
   </parent>
   <artifactId>xwiki-platform-activeinstalls-test-tests</artifactId>
   <name>XWiki Platform - Active Installs - Tests - Functional Tests</name>
@@ -36,6 +36,7 @@
   <properties>
     <xwikiPropertiesAdditionalProperties>activeinstalls.pingURL=http://localhost:9200</xwikiPropertiesAdditionalProperties>
     <xwikiDbHbmCommonExtraMappings>instance.hbm.xml</xwikiDbHbmCommonExtraMappings>
+    <!-- Override in order to add the JODA Time Plugin -->
     <xwikiCfgPlugins>\
       com.xpn.xwiki.plugin.skinx.JsSkinExtensionPlugin,\
       com.xpn.xwiki.plugin.skinx.JsSkinFileExtensionPlugin,\
@@ -72,7 +73,7 @@
     <!-- Test dependencies -->
     <dependency>
       <groupId>org.xwiki.platform</groupId>
-      <artifactId>xwiki-platform-test-ui</artifactId>
+      <artifactId>xwiki-platform-test</artifactId>
       <version>${project.version}</version>
       <scope>test</scope>
     </dependency>
@@ -141,7 +142,7 @@
            It's needed because instrumented jars in the WAR will call Clover APIs at runtime when they execute. -->
       <dependencies>
         <dependency>
-          <groupId>com.atlassian.clover</groupId>
+          <groupId>com.cenqua.clover</groupId>
           <artifactId>clover</artifactId>
         </dependency>
       </dependencies>
@@ -155,7 +156,7 @@
             <version>${project.version}</version>
             <dependencies>
               <dependency>
-                <groupId>com.atlassian.clover</groupId>
+                <groupId>com.cenqua.clover</groupId>
                 <artifactId>clover</artifactId>
                 <version>${clover.version}</version>
               </dependency>
