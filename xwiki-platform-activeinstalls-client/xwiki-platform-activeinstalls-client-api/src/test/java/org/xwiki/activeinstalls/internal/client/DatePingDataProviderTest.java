@@ -35,7 +35,9 @@ import com.google.gson.JsonParser;
 import io.searchbox.client.JestClient;
 import io.searchbox.client.JestResult;
 import io.searchbox.core.Search;
+import io.searchbox.core.SearchResult;
 import net.sf.json.JSONObject;
+import net.sf.json.test.JSONAssert;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Matchers.any;
@@ -57,8 +59,8 @@ public class DatePingDataProviderTest
     @Test
     public void provideMapping() throws Exception
     {
-        assertEquals("{\"sinceDays\":{\"type\":\"long\"},\"firstPingDate\":{\"type\":\"date\"}}",
-            JSONObject.fromObject(this.mocker.getComponentUnderTest().provideMapping()).toString());
+        JSONAssert.assertEquals("{\"sinceDays\":{\"type\":\"long\"},\"firstPingDate\":{\"type\":\"date\"}}",
+            JSONObject.fromObject(this.mocker.getComponentUnderTest().provideMapping()));
     }
 
     @Test
@@ -69,7 +71,7 @@ public class DatePingDataProviderTest
         when(idManager.getInstanceId()).thenReturn(id);
 
         JestClient client = mock(JestClient.class);
-        JestResult searchResult = new JestResult(new Gson());
+        SearchResult searchResult = new SearchResult(new Gson());
         String resultString = "{\n" +
             "   \"took\": 4,\n" +
             "   \"timed_out\": false,\n" +
@@ -100,7 +102,7 @@ public class DatePingDataProviderTest
         JestClientManager jestManager = this.mocker.getInstance(JestClientManager.class);
         when(jestManager.getClient()).thenReturn(client);
 
-        assertEquals("{\"sinceDays\":4,\"firstPingDate\":1392854400000}",
-            JSONObject.fromObject(this.mocker.getComponentUnderTest().provideData()).toString());
+        JSONAssert.assertEquals("{\"sinceDays\":4,\"firstPingDate\":1392854400000}",
+            JSONObject.fromObject(this.mocker.getComponentUnderTest().provideData()));
     }
 }

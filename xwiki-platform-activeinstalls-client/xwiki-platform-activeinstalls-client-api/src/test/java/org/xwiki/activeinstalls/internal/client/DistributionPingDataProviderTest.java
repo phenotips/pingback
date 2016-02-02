@@ -31,7 +31,9 @@ import org.xwiki.instance.InstanceId;
 import org.xwiki.instance.InstanceIdManager;
 import org.xwiki.test.mockito.MockitoComponentMockingRule;
 
+import net.sf.json.JSON;
 import net.sf.json.JSONObject;
+import net.sf.json.test.JSONAssert;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
@@ -52,10 +54,10 @@ public class DistributionPingDataProviderTest
     @Test
     public void provideMapping() throws Exception
     {
-        assertEquals("{\"distributionId\":{\"index\":\"not_analyzed\",\"type\":\"string\"},"
+        JSONAssert.assertEquals("{\"distributionId\":{\"index\":\"not_analyzed\",\"type\":\"string\"},"
                 + "\"distributionVersion\":{\"index\":\"not_analyzed\",\"type\":\"string\"},"
                 + "\"instanceId\":{\"index\":\"not_analyzed\",\"type\":\"string\"}}",
-            JSONObject.fromObject(this.mocker.getComponentUnderTest().provideMapping()).toString()
+            JSONObject.fromObject(this.mocker.getComponentUnderTest().provideMapping())
         );
     }
 
@@ -72,10 +74,10 @@ public class DistributionPingDataProviderTest
         CoreExtensionRepository CoreExtensionRepository = this.mocker.getInstance(CoreExtensionRepository.class);
         when(CoreExtensionRepository.getEnvironmentExtension()).thenReturn(environmentExtension);
 
-        assertEquals("{\"distributionId\":\"environmentextensionid\","
+        JSONAssert.assertEquals("{\"distributionId\":\"environmentextensionid\","
                 + "\"distributionVersion\":\"2.0\","
                 + "\"instanceId\":\"" + id.getInstanceId() + "\"}",
-            JSONObject.fromObject(this.mocker.getComponentUnderTest().provideData()).toString()
+            JSONObject.fromObject(this.mocker.getComponentUnderTest().provideData())
         );
     }
 }

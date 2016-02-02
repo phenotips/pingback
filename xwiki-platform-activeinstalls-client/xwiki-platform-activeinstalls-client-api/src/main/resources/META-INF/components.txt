@@ -7,3 +7,5 @@ org.xwiki.activeinstalls.internal.client.data.JavaPingDataProvider
 org.xwiki.activeinstalls.internal.client.data.OsPingDataProvider
 org.xwiki.activeinstalls.internal.client.data.DatabasePingDataProvider
 org.xwiki.activeinstalls.internal.client.data.ServletContainerPingDataProvider
+org.xwiki.activeinstalls.internal.client.data.UsersPingDataProvider
+org.xwiki.activeinstalls.internal.client.data.PatientsPingDataProvider

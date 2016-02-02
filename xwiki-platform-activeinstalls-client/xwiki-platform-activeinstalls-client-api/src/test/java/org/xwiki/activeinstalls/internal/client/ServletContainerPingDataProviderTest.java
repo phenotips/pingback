@@ -29,6 +29,7 @@ import org.xwiki.environment.internal.ServletEnvironment;
 import org.xwiki.test.mockito.MockitoComponentMockingRule;
 
 import net.sf.json.JSONObject;
+import net.sf.json.test.JSONAssert;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
@@ -49,9 +50,9 @@ public class ServletContainerPingDataProviderTest
     @Test
     public void provideMapping() throws Exception
     {
-        assertEquals("{\"servletContainerVersion\":{\"index\":\"not_analyzed\",\"type\":\"string\"},"
+        JSONAssert.assertEquals("{\"servletContainerVersion\":{\"index\":\"not_analyzed\",\"type\":\"string\"},"
                 + "\"servletContainerName\":{\"index\":\"not_analyzed\",\"type\":\"string\"}}",
-            JSONObject.fromObject(this.mocker.getComponentUnderTest().provideMapping()).toString()
+            JSONObject.fromObject(this.mocker.getComponentUnderTest().provideMapping())
         );
     }
 
@@ -65,7 +66,7 @@ public class ServletContainerPingDataProviderTest
         when(servletEnvironment.getServletContext()).thenReturn(servletContext);
         when(servletContext.getServerInfo()).thenReturn("Apache Tomcat/7.0.4 (optional text)");
 
-        assertEquals("{\"servletContainerVersion\":\"7.0.4\",\"servletContainerName\":\"Apache Tomcat\"}",
-            JSONObject.fromObject(this.mocker.getComponentUnderTest().provideData()).toString());
+        JSONAssert.assertEquals("{\"servletContainerVersion\":\"7.0.4\",\"servletContainerName\":\"Apache Tomcat\"}",
+            JSONObject.fromObject(this.mocker.getComponentUnderTest().provideData()));
     }
 }

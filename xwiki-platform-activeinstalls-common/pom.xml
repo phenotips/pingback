@@ -46,12 +46,23 @@
       <version>${commons.version}</version>
     </dependency>
     <dependency>
+      <groupId>io.searchbox</groupId>
+      <artifactId>jest</artifactId>
+      <version>2.0.0</version>
+      <exclusions>
+        <exclusion>
+          <groupId>commons-logging</groupId>
+          <artifactId>commons-logging</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
       <!-- Note that we use Jest which uses REST calls to the ES server instead of using the ES Java API because that
            API requires a version of Lucene incompatible with the one required by the Search module.
            See https://github.com/elasticsearch/elasticsearch/issues/2091#issuecomment-23630194 -->
       <groupId>io.searchbox</groupId>
-      <artifactId>jest</artifactId>
-      <version>0.1.0</version>
+      <artifactId>jest-common</artifactId>
+      <version>2.0.0</version>
       <exclusions>
         <exclusion>
           <groupId>commons-logging</groupId>

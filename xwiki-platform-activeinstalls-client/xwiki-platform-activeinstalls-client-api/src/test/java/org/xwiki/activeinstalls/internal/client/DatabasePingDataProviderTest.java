@@ -19,24 +19,23 @@
  */
 package org.xwiki.activeinstalls.internal.client;
 
-import java.sql.DatabaseMetaData;
-
-import org.junit.Rule;
-import org.junit.Test;
 import org.xwiki.activeinstalls.internal.client.data.DatabasePingDataProvider;
 import org.xwiki.context.Execution;
 import org.xwiki.context.ExecutionContext;
 import org.xwiki.test.mockito.MockitoComponentMockingRule;
 
+import java.sql.DatabaseMetaData;
+
+import org.junit.Rule;
+import org.junit.Test;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
 import com.xpn.xwiki.XWikiContext;
 import com.xpn.xwiki.store.XWikiCacheStoreInterface;
 import com.xpn.xwiki.store.XWikiHibernateStore;
-
 import net.sf.json.JSONObject;
-
-import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import net.sf.json.test.JSONAssert;
 
 /**
  * Unit tests for {@link org.xwiki.activeinstalls.internal.client.data.DatabasePingDataProvider}.
@@ -53,9 +52,9 @@ public class DatabasePingDataProviderTest
     @Test
     public void provideMapping() throws Exception
     {
-        assertEquals("{\"dbName\":{\"index\":\"not_analyzed\",\"type\":\"string\"},"
-                + "\"dbVersion\":{\"index\":\"not_analyzed\",\"type\":\"string\"}}",
-            JSONObject.fromObject(this.mocker.getComponentUnderTest().provideMapping()).toString()
+        JSONAssert.assertEquals("{\"dbName\":{\"index\":\"not_analyzed\",\"type\":\"string\"},"
+                        + "\"dbVersion\":{\"index\":\"not_analyzed\",\"type\":\"string\"}}",
+                JSONObject.fromObject(this.mocker.getComponentUnderTest().provideMapping())
         );
     }
 
@@ -78,7 +77,7 @@ public class DatabasePingDataProviderTest
         when(databaseMetaData.getDatabaseProductName()).thenReturn("HSQL Database Engine");
         when(databaseMetaData.getDatabaseProductVersion()).thenReturn("2.2.9");
 
-        assertEquals("{\"dbName\":\"HSQL Database Engine\",\"dbVersion\":\"2.2.9\"}",
-            JSONObject.fromObject(this.mocker.getComponentUnderTest().provideData()).toString());
+        JSONAssert.assertEquals("{\"dbName\":\"HSQL Database Engine\",\"dbVersion\":\"2.2.9\"}",
+                JSONObject.fromObject(this.mocker.getComponentUnderTest().provideData()));
     }
 }

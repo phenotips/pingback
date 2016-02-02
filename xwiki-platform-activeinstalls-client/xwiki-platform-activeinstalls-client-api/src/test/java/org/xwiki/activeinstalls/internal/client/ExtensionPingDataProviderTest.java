@@ -30,6 +30,7 @@ import org.xwiki.extension.repository.InstalledExtensionRepository;
 import org.xwiki.test.mockito.MockitoComponentMockingRule;
 
 import net.sf.json.JSONObject;
+import net.sf.json.test.JSONAssert;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
@@ -50,9 +51,9 @@ public class ExtensionPingDataProviderTest
     @Test
     public void provideMapping() throws Exception
     {
-        assertEquals("{\"extensions\":{\"properties\":{\"id\":{\"index\":\"not_analyzed\","
+        JSONAssert.assertEquals("{\"extensions\":{\"properties\":{\"id\":{\"index\":\"not_analyzed\","
                 + "\"type\":\"string\"},\"version\":{\"index\":\"not_analyzed\",\"type\":\"string\"}}}}",
-            JSONObject.fromObject(this.mocker.getComponentUnderTest().provideMapping()).toString()
+            JSONObject.fromObject(this.mocker.getComponentUnderTest().provideMapping())
         );
     }
 
@@ -66,7 +67,7 @@ public class ExtensionPingDataProviderTest
         InstalledExtensionRepository repository = this.mocker.getInstance(InstalledExtensionRepository.class);
         when(repository.getInstalledExtensions()).thenReturn(Collections.singletonList(extension));
 
-        assertEquals("{\"extensions\":[{\"id\":\"extensionid\",\"version\":\"1.0\"}]}",
-            JSONObject.fromObject(this.mocker.getComponentUnderTest().provideData()).toString());
+        JSONAssert.assertEquals("{\"extensions\":[{\"id\":\"extensionid\",\"version\":\"1.0\"}]}",
+            JSONObject.fromObject(this.mocker.getComponentUnderTest().provideData()));
     }
 }

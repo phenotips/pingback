@@ -19,6 +19,9 @@
  */
 package org.xwiki.activeinstalls.internal.client;
 
+import org.xwiki.activeinstalls.internal.JestClientManager;
+import org.xwiki.component.annotation.Component;
+
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -27,9 +30,6 @@ import java.util.Map;
 import javax.inject.Inject;
 import javax.inject.Provider;
 import javax.inject.Singleton;
-
-import org.xwiki.activeinstalls.internal.JestClientManager;
-import org.xwiki.component.annotation.Component;
 
 import io.searchbox.client.JestClient;
 import io.searchbox.client.JestResult;
@@ -65,14 +65,14 @@ public class DefaultPingSender implements PingSender
         // Step 2: Create a mapping so that we can search distribution versions containing hyphens (otherwise they
         // are removed by the default tokenizer/analyzer). If mapping already exists then it'll just be ignored.
         PutMapping putMapping =
-            new PutMapping.Builder(JestClientManager.INDEX, JestClientManager.TYPE, constructJSONMapping()).build();
+                new PutMapping.Builder(JestClientManager.INDEX, JestClientManager.TYPE, constructJSONMapping()).build();
         client.execute(putMapping);
 
         // Step 3: Index the data
         Index index = new Index.Builder(constructIndexJSON())
-            .index(JestClientManager.INDEX)
-            .type(JestClientManager.TYPE)
-            .build();
+                .index(JestClientManager.INDEX)
+                .type(JestClientManager.TYPE)
+                .build();
         JestResult result = client.execute(index);
 
         if (!result.isSucceeded()) {
