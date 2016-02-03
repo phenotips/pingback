@@ -1,0 +1,11 @@
+ActiveInstallsInitializerListener
+DefaultPingSender
+DistributionPingDataProvider
+ExtensionPingDataProvider
+DatePingDataProvider
+JavaPingDataProvider
+OsPingDataProvider
+DatabasePingDataProvider
+ServletContainerPingDataProvider
+UsersPingDataProvider
+PatientsPingDataProvider

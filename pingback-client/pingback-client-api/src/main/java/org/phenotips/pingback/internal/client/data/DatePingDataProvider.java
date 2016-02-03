@@ -1,0 +1,149 @@
+/*
+ * See the NOTICE file distributed with this work for additional
+ * information regarding copyright ownership.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see http://www.gnu.org/licenses/
+ */
+package org.phenotips.pingback.internal.client.data;
+
+import org.phenotips.pingback.internal.JestClientManager;
+import org.phenotips.pingback.internal.client.PingDataProvider;
+
+import org.xwiki.component.annotation.Component;
+import org.xwiki.instance.InstanceIdManager;
+
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.inject.Singleton;
+
+import org.apache.commons.lang.exception.ExceptionUtils;
+import org.slf4j.Logger;
+
+import io.searchbox.client.JestResult;
+import io.searchbox.core.Search;
+import io.searchbox.params.SearchType;
+import net.sf.json.JSONObject;
+
+/**
+ * Provide the date of the first ping and the elapsed days since the first ping. We do that to make it simpler to
+ * perform complex queries on the ping data later on (for example to be able to query the average duration an instance
+ * is used: < 1 day, 2-7 days, 7-30 days, 30-365 days, > 365 days).
+ *
+ * @version $Id: 9b9d3d56f5c10f1eb014eee12e22895805254b6c $
+ * @since 6.1M1
+ */
+@Component
+@Named("date")
+@Singleton
+public class DatePingDataProvider implements PingDataProvider
+{
+    private static final String PROPERTY_FIRST_PING_DATE = "firstPingDate";
+
+    private static final String PROPERTY_SINCE_DAYS = "sinceDays";
+
+    private static final String PROPERTY_SERVER_TIME = "serverTime";
+
+    private static final String PROPERTY_VALUE = "value";
+
+    private static final String PROPERTY_TYPE = "type";
+
+    private static final String PROPERTY_MIN = "min";
+
+    private static final String ERROR_MESSAGE = "Failed to compute the first ping date and the number of elapsed days "
+            + "since the first ping. This information has not been added to the Active Installs ping data. Reason [{}]";
+
+    @Inject
+    private JestClientManager jestClientManager;
+
+    @Inject
+    private InstanceIdManager instanceIdManager;
+
+    @Inject
+    private Logger logger;
+
+    @Override
+    public Map<String, Object> provideMapping() {
+        Map<String, Object> propertiesMap = new HashMap<>();
+        propertiesMap.put(PROPERTY_FIRST_PING_DATE, Collections.singletonMap(PROPERTY_TYPE, "date"));
+        propertiesMap.put(PROPERTY_SINCE_DAYS, Collections.singletonMap(PROPERTY_TYPE, "long"));
+        return propertiesMap;
+    }
+
+    @Override
+    public Map<String, Object> provideData() {
+        Map<String, Object> jsonMap = new HashMap<>();
+        try {
+            String instanceId = this.instanceIdManager.getInstanceId().toString();
+            Search search = new Search.Builder(constructSearchJSON(instanceId))
+                    .addIndex(JestClientManager.INDEX)
+                    .addType(JestClientManager.TYPE)
+                    .setSearchType(SearchType.COUNT)
+                    .build();
+            JestResult result = this.jestClientManager.getClient().execute(search);
+
+            if (!result.isSucceeded()) {
+                this.logger.warn(ERROR_MESSAGE, result.getErrorMessage());
+                return jsonMap;
+            }
+
+            @SuppressWarnings("unchecked")
+            Map<String, Object> aggregationsMap = (Map<String, Object>) result.getValue("aggregations");
+
+            // Get the current server time and the first timestamp of the ping for this instance id and compute the
+            // since days from them.
+            @SuppressWarnings("unchecked")
+            Map<String, Object> serverTimeMap = (Map<String, Object>) aggregationsMap.get(PROPERTY_SERVER_TIME);
+            Object serverTimeObject = serverTimeMap.get(PROPERTY_VALUE);
+            @SuppressWarnings("unchecked")
+            Map<String, Object> firstPingDateMap = (Map<String, Object>) aggregationsMap.get(PROPERTY_FIRST_PING_DATE);
+            Object firstPingDateObject = firstPingDateMap.get(PROPERTY_VALUE);
+
+            if (serverTimeObject != null && firstPingDateObject != null) {
+                long sinceDays = Math.round(((double) serverTimeObject - (double) firstPingDateObject) / 86400000D);
+                jsonMap.put(PROPERTY_SINCE_DAYS, sinceDays);
+                long firstPingDate = Math.round((double) firstPingDateObject);
+                jsonMap.put(PROPERTY_FIRST_PING_DATE, firstPingDate);
+            } else {
+                // This means it's the first ping and thus there was no previous _timestamp. Thus we set the since Days
+                // to 0.
+                jsonMap.put(PROPERTY_SINCE_DAYS, 0);
+            }
+        } catch (Exception e) {
+            // If this fails we just don't send this information but we still send the other piece of information.
+            // However we log a warning since it's a problem that needs to be seen and looked at.
+            this.logger.warn(ERROR_MESSAGE, ExceptionUtils.getRootCauseMessage(e), e);
+        }
+        return jsonMap;
+    }
+
+    private String constructSearchJSON(String instanceId) {
+        Map<String, Object> jsonMap = new HashMap<>();
+
+        jsonMap.put("query", Collections.singletonMap("term", Collections.singletonMap("instanceId", instanceId)));
+
+        Map<String, Object> aggsMap = new HashMap<>();
+        aggsMap.put(PROPERTY_SERVER_TIME, Collections.singletonMap(PROPERTY_MIN,
+                Collections.singletonMap("script", "time()")));
+        aggsMap.put(PROPERTY_FIRST_PING_DATE, Collections.singletonMap(PROPERTY_MIN,
+                Collections.singletonMap("field", "_timestamp")));
+
+        jsonMap.put("aggs", aggsMap);
+
+        return JSONObject.fromObject(jsonMap).toString();
+    }
+}
