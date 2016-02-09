@@ -3,7 +3,7 @@ elasticsearch:
     ports:
         - "9200:9200"
     volumes: 
-        - ./es-config:/usr/share/elasticsearch/config
+        - ./elasticsearch:/usr/share/elasticsearch/config
 kibana:
     image: kibana
     ports:

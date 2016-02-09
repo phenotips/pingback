@@ -1,2 +1,2 @@
-DefaultJestClientManager
-DefaultActiveInstallsConfiguration
+org.phenotips.pingback.internal.DefaultJestClientManager
+org.phenotips.pingback.internal.DefaultActiveInstallsConfiguration
