@@ -24,6 +24,7 @@ import org.xwiki.component.annotation.Component;
 import org.xwiki.instance.InstanceIdManager;
 
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -53,6 +54,7 @@ import net.sf.json.JSONObject;
 public class DatePingDataProvider implements PingDataProvider
 {
     private static final String PROPERTY_FIRST_PING_DATE = "firstPingDate";
+    private static final String PROPERTY_TIMESTAMP = "timestamp";
 
     private static final String PROPERTY_SINCE_DAYS = "sinceDays";
 
@@ -67,6 +69,8 @@ public class DatePingDataProvider implements PingDataProvider
     private static final String ERROR_MESSAGE = "Failed to compute the first ping date and the number of elapsed days "
             + "since the first ping. This information has not been added to the Active Installs ping data. Reason [{}]";
 
+    private static final String DATE_TYPE = "date";
+
     @Inject
     private JestClientManager jestClientManager;
 
@@ -79,7 +83,8 @@ public class DatePingDataProvider implements PingDataProvider
     @Override
     public Map<String, Object> provideMapping() {
         Map<String, Object> propertiesMap = new HashMap<>();
-        propertiesMap.put(PROPERTY_FIRST_PING_DATE, Collections.singletonMap(PROPERTY_TYPE, "date"));
+        propertiesMap.put(PROPERTY_TIMESTAMP, Collections.singletonMap(PROPERTY_TYPE, DATE_TYPE));
+        propertiesMap.put(PROPERTY_FIRST_PING_DATE, Collections.singletonMap(PROPERTY_TYPE, DATE_TYPE));
         propertiesMap.put(PROPERTY_SINCE_DAYS, Collections.singletonMap(PROPERTY_TYPE, "long"));
         return propertiesMap;
     }
@@ -113,6 +118,7 @@ public class DatePingDataProvider implements PingDataProvider
             Map<String, Object> firstPingDateMap = (Map<String, Object>) aggregationsMap.get(PROPERTY_FIRST_PING_DATE);
             Object firstPingDateObject = firstPingDateMap.get(PROPERTY_VALUE);
 
+            jsonMap.put(PROPERTY_TIMESTAMP, new Date().getTime());
             if (serverTimeObject != null && firstPingDateObject != null) {
                 long sinceDays = Math.round(((double) serverTimeObject - (double) firstPingDateObject) / 86400000D);
                 jsonMap.put(PROPERTY_SINCE_DAYS, sinceDays);
@@ -140,7 +146,7 @@ public class DatePingDataProvider implements PingDataProvider
         aggsMap.put(PROPERTY_SERVER_TIME, Collections.singletonMap(PROPERTY_MIN,
                 Collections.singletonMap("script", "time()")));
         aggsMap.put(PROPERTY_FIRST_PING_DATE, Collections.singletonMap(PROPERTY_MIN,
-                Collections.singletonMap("field", "_timestamp")));
+                Collections.singletonMap("field", PROPERTY_TIMESTAMP)));
 
         jsonMap.put("aggs", aggsMap);
 

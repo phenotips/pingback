@@ -81,16 +81,11 @@ public class DefaultPingSender implements PingSender
     private String constructJSONMapping() {
         Map<String, Object> jsonMap = new HashMap<>();
 
-        Map<String, Object> timestampMap = new HashMap<>();
-        timestampMap.put("enabled", true);
-        timestampMap.put("store", true);
-
         Map<String, Object> propertiesMap = new HashMap<>();
         for (PingDataProvider pingDataProvider : this.pingDataProviderProvider.get()) {
             propertiesMap.putAll(pingDataProvider.provideMapping());
         }
 
-        jsonMap.put("_timestamp", timestampMap);
         jsonMap.put("properties", propertiesMap);
 
         return JSONObject.fromObject(Collections.singletonMap(JestClientManager.TYPE, jsonMap)).toString();

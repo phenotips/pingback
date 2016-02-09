@@ -25,6 +25,7 @@ import org.xwiki.test.mockito.MockitoComponentMockingRule;
 
 import java.util.UUID;
 
+import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
 import static org.mockito.Matchers.any;
@@ -53,7 +54,7 @@ public class DatePingDataProviderTest
 
     @Test
     public void provideMapping() throws Exception {
-        JSONAssert.assertEquals("{\"sinceDays\":{\"type\":\"long\"},\"firstPingDate\":{\"type\":\"date\"}}",
+        JSONAssert.assertEquals("{\"timestamp\":{\"type\":\"date\"},\"sinceDays\":{\"type\":\"long\"},\"firstPingDate\":{\"type\":\"date\"}}",
                 JSONObject.fromObject(this.mocker.getComponentUnderTest().provideMapping()));
     }
 
@@ -95,7 +96,11 @@ public class DatePingDataProviderTest
         JestClientManager jestManager = this.mocker.getInstance(JestClientManager.class);
         when(jestManager.getClient()).thenReturn(client);
 
+        // Can't mock `new Date()`, test for timestamp presence
+        JSONObject jsonObject = JSONObject.fromObject(this.mocker.getComponentUnderTest().provideData());
+        Assert.assertTrue("Timestamp present", jsonObject.containsKey("timestamp"));
+        jsonObject.remove("timestamp");
         JSONAssert.assertEquals("{\"sinceDays\":4,\"firstPingDate\":1392854400000}",
-                JSONObject.fromObject(this.mocker.getComponentUnderTest().provideData()));
+                jsonObject);
     }
 }
