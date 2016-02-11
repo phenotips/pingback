@@ -51,9 +51,6 @@ public class UsersPingDataProvider implements PingDataProvider
     private static final String PROPERTY_USER_COUNT = "userCount";
 
     @Inject
-    private Execution execution;
-
-    @Inject
     private Logger logger;
 
     @Inject

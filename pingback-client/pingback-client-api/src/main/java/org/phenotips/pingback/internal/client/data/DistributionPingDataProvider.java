@@ -52,9 +52,6 @@ public class DistributionPingDataProvider implements PingDataProvider
     private static final String PROPERTY_DISTRIBUTION_ID = "distributionId";
 
     @Inject
-    private Logger logger;
-
-    @Inject
     private CoreExtensionRepository coreExtensionRepository;
 
     @Inject

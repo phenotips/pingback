@@ -51,9 +51,6 @@ public class PatientsPingDataProvider implements PingDataProvider
     private static final String PROPERTY_PATIENT_COUNT = "patientCount";
 
     @Inject
-    private Execution execution;
-
-    @Inject
     private Logger logger;
 
     @Inject
