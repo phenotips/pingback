@@ -33,12 +33,12 @@ import javax.inject.Named;
 import javax.inject.Singleton;
 
 import org.apache.commons.lang.exception.ExceptionUtils;
+import org.json.JSONObject;
 import org.slf4j.Logger;
 
 import io.searchbox.client.JestResult;
 import io.searchbox.core.Search;
 import io.searchbox.params.SearchType;
-import net.sf.json.JSONObject;
 
 /**
  * Provide the date of the first ping and the elapsed days since the first ping. We do that to make it simpler to
@@ -150,6 +150,6 @@ public class DatePingDataProvider implements PingDataProvider
 
         jsonMap.put("aggs", aggsMap);
 
-        return JSONObject.fromObject(jsonMap).toString();
+        return new JSONObject(jsonMap).toString();
     }
 }

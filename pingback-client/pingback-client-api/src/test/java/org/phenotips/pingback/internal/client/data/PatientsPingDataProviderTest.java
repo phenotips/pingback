@@ -26,15 +26,14 @@ import org.xwiki.test.mockito.MockitoComponentMockingRule;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import org.json.JSONObject;
 import org.junit.Rule;
 import org.junit.Test;
+import org.skyscreamer.jsonassert.JSONAssert;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-
-import net.sf.json.JSONObject;
-import net.sf.json.test.JSONAssert;
 
 /**
  * Unit tests for {@link PatientsPingDataProvider}.
@@ -51,7 +50,7 @@ public class PatientsPingDataProviderTest
     @Test
     public void testProvideMapping() throws Exception {
         JSONAssert.assertEquals("{\"patientCount\":{\"type\":\"long\"}}",
-                JSONObject.fromObject(this.mocker.getComponentUnderTest().provideMapping()));
+                new JSONObject(this.mocker.getComponentUnderTest().provideMapping()), false);
     }
 
     @Test
@@ -64,6 +63,6 @@ public class PatientsPingDataProviderTest
         when(qm.createQuery(anyString(), anyString())).thenReturn(q);
 
         JSONAssert.assertEquals("{\"patientCount\":12}",
-                JSONObject.fromObject(this.mocker.getComponentUnderTest().provideData()));
+                new JSONObject(this.mocker.getComponentUnderTest().provideData()), false);
     }
 }

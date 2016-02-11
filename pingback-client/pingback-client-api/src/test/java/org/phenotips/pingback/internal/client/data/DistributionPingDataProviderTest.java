@@ -26,13 +26,13 @@ import org.xwiki.test.mockito.MockitoComponentMockingRule;
 
 import java.util.UUID;
 
+import org.json.JSONObject;
 import org.junit.Rule;
 import org.junit.Test;
+import org.skyscreamer.jsonassert.JSONAssert;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-
-import net.sf.json.JSONObject;
-import net.sf.json.test.JSONAssert;
+import static org.mockito.Mockito.withSettings;
 
 /**
  * Unit tests for {@link DistributionPingDataProvider}.
@@ -51,7 +51,7 @@ public class DistributionPingDataProviderTest
         JSONAssert.assertEquals("{\"distributionId\":{\"index\":\"not_analyzed\",\"type\":\"string\"},"
                         + "\"distributionVersion\":{\"index\":\"not_analyzed\",\"type\":\"string\"},"
                         + "\"instanceId\":{\"index\":\"not_analyzed\",\"type\":\"string\"}}",
-                JSONObject.fromObject(this.mocker.getComponentUnderTest().provideMapping())
+                new JSONObject(this.mocker.getComponentUnderTest().provideMapping()), false
         );
     }
 
@@ -70,7 +70,7 @@ public class DistributionPingDataProviderTest
         JSONAssert.assertEquals("{\"distributionId\":\"environmentextensionid\","
                         + "\"distributionVersion\":\"2.0\","
                         + "\"instanceId\":\"" + id.getInstanceId() + "\"}",
-                JSONObject.fromObject(this.mocker.getComponentUnderTest().provideData())
+                new JSONObject(this.mocker.getComponentUnderTest().provideData()), false
         );
     }
 }

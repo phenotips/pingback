@@ -24,13 +24,12 @@ import org.xwiki.test.mockito.MockitoComponentMockingRule;
 
 import java.util.Collections;
 
+import org.json.JSONObject;
 import org.junit.Rule;
 import org.junit.Test;
+import org.skyscreamer.jsonassert.JSONAssert;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-
-import net.sf.json.JSONObject;
-import net.sf.json.test.JSONAssert;
 
 /**
  * Unit tests for {@link ExtensionPingDataProvider}.
@@ -48,7 +47,7 @@ public class ExtensionPingDataProviderTest
     public void provideMapping() throws Exception {
         JSONAssert.assertEquals("{\"extensions\":{\"properties\":{\"id\":{\"index\":\"not_analyzed\","
                         + "\"type\":\"string\"},\"version\":{\"index\":\"not_analyzed\",\"type\":\"string\"}}}}",
-                JSONObject.fromObject(this.mocker.getComponentUnderTest().provideMapping())
+                new JSONObject(this.mocker.getComponentUnderTest().provideMapping()), false
         );
     }
 
@@ -62,6 +61,6 @@ public class ExtensionPingDataProviderTest
         when(repository.getInstalledExtensions()).thenReturn(Collections.singletonList(extension));
 
         JSONAssert.assertEquals("{\"extensions\":[{\"id\":\"extensionid\",\"version\":\"1.0\"}]}",
-                JSONObject.fromObject(this.mocker.getComponentUnderTest().provideData()));
+                new JSONObject(this.mocker.getComponentUnderTest().provideData()), false);
     }
 }

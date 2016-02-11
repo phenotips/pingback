@@ -30,12 +30,13 @@ import javax.inject.Inject;
 import javax.inject.Provider;
 import javax.inject.Singleton;
 
+import org.json.JSONObject;
+
 import io.searchbox.client.JestClient;
 import io.searchbox.client.JestResult;
 import io.searchbox.core.Index;
 import io.searchbox.indices.CreateIndex;
 import io.searchbox.indices.mapping.PutMapping;
-import net.sf.json.JSONObject;
 
 /**
  * Default implementation using the Jest API to connect to a remote Elastic Search instance.
@@ -88,7 +89,7 @@ public class DefaultPingSender implements PingSender
 
         jsonMap.put("properties", propertiesMap);
 
-        return JSONObject.fromObject(Collections.singletonMap(JestClientManager.TYPE, jsonMap)).toString();
+        return new JSONObject(Collections.singletonMap(JestClientManager.TYPE, jsonMap)).toString();
     }
 
     private String constructIndexJSON() {
@@ -98,6 +99,6 @@ public class DefaultPingSender implements PingSender
             jsonMap.putAll(pingDataProvider.provideData());
         }
 
-        return JSONObject.fromObject(jsonMap).toString();
+        return new JSONObject(jsonMap).toString();
     }
 }

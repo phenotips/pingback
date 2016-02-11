@@ -33,7 +33,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
-import net.sf.json.JSONObject;
+import org.json.JSONObject;
 
 /**
  * Provide the list of installed extensions and their versions.
@@ -80,7 +80,7 @@ public class ExtensionPingDataProvider implements PingDataProvider
             Map<String, Object> extensionMap = new HashMap<>();
             extensionMap.put(PROPERTY_ID, extension.getId().getId());
             extensionMap.put(PROPERTY_VERSION, extension.getId().getVersion().toString());
-            extensions[i] = JSONObject.fromObject(extensionMap);
+            extensions[i] = new JSONObject(extensionMap);
             i++;
         }
         return Collections.singletonMap(PROPERTY_EXTENSIONS, (Object) extensions);

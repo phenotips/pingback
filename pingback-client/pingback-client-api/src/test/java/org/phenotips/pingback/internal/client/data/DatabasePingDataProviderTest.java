@@ -23,16 +23,16 @@ import org.xwiki.test.mockito.MockitoComponentMockingRule;
 
 import java.sql.DatabaseMetaData;
 
+import org.json.JSONObject;
 import org.junit.Rule;
 import org.junit.Test;
+import org.skyscreamer.jsonassert.JSONAssert;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import com.xpn.xwiki.XWikiContext;
 import com.xpn.xwiki.store.XWikiCacheStoreInterface;
 import com.xpn.xwiki.store.XWikiHibernateStore;
-import net.sf.json.JSONObject;
-import net.sf.json.test.JSONAssert;
 
 /**
  * Unit tests for {@link DatabasePingDataProvider}.
@@ -50,7 +50,7 @@ public class DatabasePingDataProviderTest
     public void provideMapping() throws Exception {
         JSONAssert.assertEquals("{\"dbName\":{\"index\":\"not_analyzed\",\"type\":\"string\"},"
                         + "\"dbVersion\":{\"index\":\"not_analyzed\",\"type\":\"string\"}}",
-                JSONObject.fromObject(this.mocker.getComponentUnderTest().provideMapping())
+                new JSONObject(this.mocker.getComponentUnderTest().provideMapping()), false
         );
     }
 
@@ -73,6 +73,6 @@ public class DatabasePingDataProviderTest
         when(databaseMetaData.getDatabaseProductVersion()).thenReturn("2.2.9");
 
         JSONAssert.assertEquals("{\"dbName\":\"HSQL Database Engine\",\"dbVersion\":\"2.2.9\"}",
-                JSONObject.fromObject(this.mocker.getComponentUnderTest().provideData()));
+                new JSONObject(this.mocker.getComponentUnderTest().provideData()), false);
     }
 }

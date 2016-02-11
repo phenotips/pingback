@@ -23,13 +23,12 @@ import org.xwiki.test.mockito.MockitoComponentMockingRule;
 
 import javax.servlet.ServletContext;
 
+import org.json.JSONObject;
 import org.junit.Rule;
 import org.junit.Test;
+import org.skyscreamer.jsonassert.JSONAssert;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-
-import net.sf.json.JSONObject;
-import net.sf.json.test.JSONAssert;
 
 /**
  * Unit tests for {@link ServletContainerPingDataProvider}.
@@ -47,7 +46,7 @@ public class ServletContainerPingDataProviderTest
     public void provideMapping() throws Exception {
         JSONAssert.assertEquals("{\"servletContainerVersion\":{\"index\":\"not_analyzed\",\"type\":\"string\"},"
                         + "\"servletContainerName\":{\"index\":\"not_analyzed\",\"type\":\"string\"}}",
-                JSONObject.fromObject(this.mocker.getComponentUnderTest().provideMapping())
+                new JSONObject(this.mocker.getComponentUnderTest().provideMapping()), false
         );
     }
 
@@ -61,6 +60,6 @@ public class ServletContainerPingDataProviderTest
         when(servletContext.getServerInfo()).thenReturn("Apache Tomcat/7.0.4 (optional text)");
 
         JSONAssert.assertEquals("{\"servletContainerVersion\":\"7.0.4\",\"servletContainerName\":\"Apache Tomcat\"}",
-                JSONObject.fromObject(this.mocker.getComponentUnderTest().provideData()));
+                new JSONObject(this.mocker.getComponentUnderTest().provideData()), false);
     }
 }
