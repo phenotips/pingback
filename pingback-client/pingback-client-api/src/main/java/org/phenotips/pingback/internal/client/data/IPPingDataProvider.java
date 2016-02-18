@@ -20,52 +20,55 @@ package org.phenotips.pingback.internal.client.data;
 import org.phenotips.pingback.internal.client.PingDataProvider;
 
 import org.xwiki.component.annotation.Component;
-import org.xwiki.query.Query;
-import org.xwiki.query.QueryException;
-import org.xwiki.query.QueryFilter;
-import org.xwiki.query.QueryManager;
+import org.xwiki.configuration.ConfigurationSource;
 
+import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Singleton;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.exception.ExceptionUtils;
+import org.apache.http.client.config.RequestConfig;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
+import org.json.JSONObject;
 import org.slf4j.Logger;
 
 /**
- * Provide database name and version.
+ * Provide external IP address of current instance.
  *
  * @version $Id: 1f34ade15fc5c1b8f8e93ca0f022c04ebda37ee7 $
  * @since 6.1M1
  */
 @Component
-@Named("patients")
+@Named("ip")
 @Singleton
-public class PatientsPingDataProvider implements PingDataProvider
+public class IPPingDataProvider implements PingDataProvider
 {
-    private static final String PROPERTY_PATIENT_COUNT = "patientCount";
-
+    static final String IP_FETCH_URL_PROPERTY = "activeinstalls.ipFetchURL";
+    private static final String PROPERTY_IP = "ip";
     @Inject
     private Logger logger;
 
     @Inject
-    private QueryManager qm;
+    private ConfigurationSource configuration;
 
-    @Inject
-    @Named("count")
-    private QueryFilter countFilter;
+    private CloseableHttpClient client = HttpClients.createSystem();
 
     @Override
     public Map<String, Object> provideMapping() {
         Map<String, Object> map = new HashMap<>();
-        map.put("type", "long");
+        map.put("type", PROPERTY_IP);
 
         Map<String, Object> propertiesMap = new HashMap<>();
-        propertiesMap.put(PROPERTY_PATIENT_COUNT, map);
+        propertiesMap.put(PROPERTY_IP, map);
 
         return propertiesMap;
     }
@@ -74,15 +77,29 @@ public class PatientsPingDataProvider implements PingDataProvider
     public Map<String, Object> provideData() {
         Map<String, Object> jsonMap = new HashMap<>();
 
+        CloseableHttpResponse response = null;
         try {
-            Query q = this.qm.createQuery(
-                    "from doc.object(PhenoTips.PatientClass) as patient "
-                            + "where patient.name<>'PhenoTips.PatientTemplate'", Query.XWQL);
-            List<Object> results = q.addFilter(countFilter).execute();
-            long count = (long) results.get(0);
-            jsonMap.put(PROPERTY_PATIENT_COUNT, count);
-        } catch (QueryException e) {
-            logWarning("Error getting patient count", e);
+            String uri = configuration.getProperty(IP_FETCH_URL_PROPERTY);
+            HttpGet method = new HttpGet(uri);
+            RequestConfig config = RequestConfig.custom().setSocketTimeout(2000).build();
+            method.setConfig(config);
+            response = this.client.execute(method);
+            JSONObject obj = new JSONObject(IOUtils.toString(response.getEntity().getContent()));
+
+            if (obj.has(PROPERTY_IP)) {
+                jsonMap.put(PROPERTY_IP, obj.get(PROPERTY_IP));
+            }
+        } catch (Exception e) {
+            logWarning("Making IP request failed.", e);
+        } finally {
+            if (response != null) {
+                try {
+                    EntityUtils.consumeQuietly(response.getEntity());
+                    response.close();
+                } catch (IOException ex) {
+                    // Not dangerous
+                }
+            }
         }
 
         return jsonMap;
@@ -92,4 +109,6 @@ public class PatientsPingDataProvider implements PingDataProvider
         this.logger.warn("{}. This information has not been added to the Active Installs ping data. Reason [{}]",
                 explanation, ExceptionUtils.getRootCauseMessage(e), e);
     }
+
+
 }

@@ -29,7 +29,7 @@
   <packaging>jar</packaging>
   <description>API to store instance UUID and send regular pings notifying that the instance is alive</description>
   <properties>
-    <coverage.instructionRatio>0.68</coverage.instructionRatio>
+    <coverage.instructionRatio>0.67</coverage.instructionRatio>
     <!-- Name to display by the Extension Manager -->
     <xwiki.extension.name>PingBack Client API</xwiki.extension.name>
   </properties>
@@ -88,6 +88,13 @@
       <groupId>org.skyscreamer</groupId>
       <artifactId>jsonassert</artifactId>
       <version>1.3.0</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.httpcomponents</groupId>
+      <artifactId>httpclient</artifactId>
+      <version>4.3.6</version>
+      <classifier>tests</classifier>
       <scope>test</scope>
     </dependency>
   </dependencies>

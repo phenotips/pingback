@@ -20,7 +20,6 @@ package org.phenotips.pingback.internal.client.data;
 import org.phenotips.pingback.internal.client.PingDataProvider;
 
 import org.xwiki.component.annotation.Component;
-import org.xwiki.context.Execution;
 import org.xwiki.query.Query;
 import org.xwiki.query.QueryException;
 import org.xwiki.query.QueryFilter;
