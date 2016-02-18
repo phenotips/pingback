@@ -1,6 +1,7 @@
 # PhenoTips pingback Mechanism
 
-This has been forked from [xwiki-platform](https://github.com/xwiki/xwiki-platform/tree/master/xwiki-platform-core/xwiki-platform-activeinstalls)
+This has been forked from
+[xwiki-platform](https://github.com/xwiki/xwiki-platform/tree/master/xwiki-platform-core/xwiki-platform-activeinstalls)
 due to PhenoTips not using the latest version of XWiki.
 
 ## Pingback ElasticSearch Configuration 
@@ -10,9 +11,12 @@ due to PhenoTips not using the latest version of XWiki.
 To quickly set up a running ES instance, make sure you have docker and
 docker-compose install. Then run `docker-compose up` in this directory.
 
-ElasticSearch should be running on http://localhost:9200/ and you can view the Kibana GUI at http://localhost:5601/
+ElasticSearch should be running on http://localhost:9200/ and you can view the
+Kibana GUI at http://localhost:5601/
 
-If you are on Windows, instead install [Vagrant](https://www.vagrantup.com/). You may have to restart your machine if you didn't previously have Virtualbox. After installing Vagrant, do the following (it may take a while):
+If you are on Windows, instead install [Vagrant](https://www.vagrantup.com/).
+You may have to restart your machine if you didn't previously have Virtualbox.
+After installing Vagrant, do the following (it may take a while):
 ```sh
 vagrant up
 ```
@@ -26,3 +30,12 @@ vagrant up
   [Kibana](https://www.elastic.co/products/kibana) to browse and graph the ES
   indeces. **Note** if Kibana is not running on the same machine as ES, make
   sure to allow it's IP in the `readonlyrest` section of `elasticsearch.yml`
+
+#### Tips
+
+- Peruse the [ElasticSearch API Doc](https://www.elastic.co/guide/en/elasticsearch/reference/2.2/index.html). 
+  It'll be of use if you need to modify any of the indeces.
+- Since the data-model allows multiple pings for a single client to be
+  recorded, you have to be careful to exclude the old pings from your
+  aggregate queries and graphs. A simple way to check pings over the last
+  three days is to search `timestamp[-3d to *]`.
