@@ -35,7 +35,7 @@ import javax.inject.Singleton;
 /**
  * Provide the instance's unique id and distribution id and version.
  *
- * @version $Id: 01d889186beecbb9e4a4fca5b47a727954e803b0 $
+ * @version $Id$
  * @since 6.1M1
  */
 @Component

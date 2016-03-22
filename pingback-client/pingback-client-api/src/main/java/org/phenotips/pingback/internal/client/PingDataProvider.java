@@ -24,7 +24,7 @@ import java.util.Map;
 /**
  * Allows providing additional data in the ping sent to the server.
  *
- * @version $Id: 95aa6c584fc0778f3baa65bce8ca88ed00e8698c $
+ * @version $Id$
  * @since 6.1M1
  */
 @Role

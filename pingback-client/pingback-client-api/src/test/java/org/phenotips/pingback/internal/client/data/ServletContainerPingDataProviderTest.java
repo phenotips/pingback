@@ -33,7 +33,7 @@ import static org.mockito.Mockito.when;
 /**
  * Unit tests for {@link ServletContainerPingDataProvider}.
  *
- * @version $Id: 752ccb064424a6ebe3655bda1593a1a3f2e6752f $
+ * @version $Id$
  * @since 6.1M1
  */
 public class ServletContainerPingDataProviderTest

@@ -23,7 +23,7 @@ import org.xwiki.component.annotation.Role;
  * Sends a ping to a remote instance that stores it, thus allowing us to have stats on the number of active XWiki
  * installations out there.
  *
- * @version $Id: 8c353c42aa5012c87fac1b6c9016f6bfe4d6ee6a $
+ * @version $Id$
  * @since 5.2M2
  */
 @Role

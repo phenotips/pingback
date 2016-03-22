@@ -37,7 +37,7 @@ import com.xpn.xwiki.store.XWikiHibernateStore;
 /**
  * Unit tests for {@link DatabasePingDataProvider}.
  *
- * @version $Id: 03a1b16691ac376d2113d8de0a94e9ce67dd89db $
+ * @version $Id$
  * @since 6.1M1
  */
 public class DatabasePingDataProviderTest

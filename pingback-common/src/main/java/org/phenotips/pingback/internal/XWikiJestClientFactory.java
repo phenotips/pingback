@@ -24,7 +24,7 @@ import io.searchbox.client.JestClientFactory;
 /**
  * Ensure that Jest works through an HTTP Proxy.
  *
- * @version $Id: be8f78ffe2f948af108df3fc48b977797fe2c131 $
+ * @version $Id$
  * @since 6.1
  */
 public class XWikiJestClientFactory extends JestClientFactory

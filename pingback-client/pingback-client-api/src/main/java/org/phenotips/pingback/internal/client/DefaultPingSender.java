@@ -41,7 +41,7 @@ import io.searchbox.indices.mapping.PutMapping;
 /**
  * Default implementation using the Jest API to connect to a remote Elastic Search instance.
  *
- * @version $Id: ef8745c841164a9c82ae34900386fe477316665c $
+ * @version $Id$
  * @since 5.2M2
  */
 @Component

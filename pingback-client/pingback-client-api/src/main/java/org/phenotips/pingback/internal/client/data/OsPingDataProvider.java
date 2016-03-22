@@ -30,7 +30,7 @@ import javax.inject.Singleton;
 /**
  * Provide the Operating System's architecture, name and version.
  *
- * @version $Id: e209b558e101eb45509a6c621ef9b22d3ebccf56 $
+ * @version $Id$
  * @since 6.1M1
  */
 @Component

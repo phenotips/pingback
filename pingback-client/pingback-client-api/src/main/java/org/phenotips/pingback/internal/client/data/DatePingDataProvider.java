@@ -45,7 +45,7 @@ import io.searchbox.params.SearchType;
  * perform complex queries on the ping data later on (for example to be able to query the average duration an instance
  * is used: < 1 day, 2-7 days, 7-30 days, 30-365 days, > 365 days).
  *
- * @version $Id: 9b9d3d56f5c10f1eb014eee12e22895805254b6c $
+ * @version $Id$
  * @since 6.1M1
  */
 @Component

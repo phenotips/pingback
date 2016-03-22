@@ -38,7 +38,7 @@ import org.json.JSONObject;
 /**
  * Provide the list of installed extensions and their versions.
  *
- * @version $Id: 9a69c4efc2ba12a8beeb871bc771365b34e065c0 $
+ * @version $Id$
  * @since 6.1M1
  */
 @Component

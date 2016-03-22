@@ -37,7 +37,7 @@ import static org.mockito.Mockito.withSettings;
 /**
  * Unit tests for {@link DistributionPingDataProvider}.
  *
- * @version $Id: 828222ea0dd7656bad4a3bc8212167effa8dbb07 $
+ * @version $Id$
  * @since 6.1M1
  */
 public class DistributionPingDataProviderTest

@@ -44,7 +44,7 @@ import org.slf4j.Logger;
 /**
  * Provide external IP address of current instance.
  *
- * @version $Id: 1f34ade15fc5c1b8f8e93ca0f022c04ebda37ee7 $
+ * @version $Id$
  * @since 6.1M1
  */
 @Component

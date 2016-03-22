@@ -30,7 +30,7 @@ import javax.inject.Singleton;
 /**
  * Provide the JVM's vendor and version.
  *
- * @version $Id: 238f3067bd176eb32bd68f4477d0d6203a0d54e3 $
+ * @version $Id$
  * @since 6.1M1
  */
 @Component

@@ -36,7 +36,7 @@ import io.searchbox.core.Index;
 /**
  * Unit tests for {@link DefaultPingSender}.
  *
- * @version $Id: ed97af206bbba43a2e6ce4fbdd9e55d1de18f3af $
+ * @version $Id$
  * @since 5.2M2
  */
 public class DefaultPingSenderTest

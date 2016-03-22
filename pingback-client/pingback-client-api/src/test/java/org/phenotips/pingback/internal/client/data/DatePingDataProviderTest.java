@@ -43,7 +43,7 @@ import io.searchbox.core.SearchResult;
 /**
  * Unit tests for {@link DatePingDataProvider}.
  *
- * @version $Id: 6c2ebdc183c5120f58766cad8a44e85539ff91c5 $
+ * @version $Id$
  * @since 6.1M1
  */
 public class DatePingDataProviderTest

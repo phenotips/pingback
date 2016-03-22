@@ -22,7 +22,7 @@ import org.xwiki.component.annotation.Role;
 /**
  * Configuration properties for the Active Installs module.
  *
- * @version $Id: 74612bbbfd920c85caa9a833eaf945a985533409 $
+ * @version $Id$
  * @since 5.2M2
  */
 @Role

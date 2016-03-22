@@ -30,7 +30,7 @@ import com.xpn.xwiki.util.AbstractXWikiRunnable;
  * installed extensions) to a central active installs Elastic Search server in order to count the number of active
  * installs of XWiki (and to know what extensions and in which versions they use).
  *
- * @version $Id: 5b5ee05932744621284e0b9b8c6fd6e0d8ff47c9 $
+ * @version $Id$
  * @since 5.2M2
  */
 public class ActiveInstallsPingThread extends AbstractXWikiRunnable
