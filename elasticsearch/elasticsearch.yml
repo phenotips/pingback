@@ -98,22 +98,31 @@ network.host: 0.0.0.0
 script.aggs: on
 
 readonlyrest:
-    # (De)activate plugin
-    enable: false
+# (De)activate plugin
+  enable: true
 
-    # The HTTP response body to return in case of forbidden request.
-    # If this is null or omitted, the name of the first violated access control
-    # rule is returned (useful for debugging!)
-    response_if_req_forbidden: Sorry, your request is forbidden.
+  # The HTTP response body to return in case of forbidden request.
+  # If this is null or omitted, the name of the first violated access control
+  # rule is returned (useful for debugging!)
+  response_if_req_forbidden: '{"error": {"code":403, "message":"Sorry, your request is forbidden."}}'
 
-    # Default policy is to forbid everything, let's define a whitelist
-    access_control_rules:
+  # Default policy is to forbid everything, let's define a whitelist
+  access_control_rules:
+    - name: allow all GET requests
+      type: allow
+      method: [GET]
 
     - name: allow localhost
       type: allow
       hosts: [127.0.0.1]
+      method: [GET, POST, PUT, DELETE, OPTIONS]
 
     - name: full access to install index
       type: allow
-      uri_re: ^http://[^/]+/installs/install2/.*
+      uri_re: ^https?://[^/]+/installs
       method: [PUT]
+
+    - name: full access to install index
+      type: allow
+      uri_re: ^https?://[^/]+/installs/install2/.*
+      method: [PUT, POST]
