@@ -3,6 +3,7 @@ org.phenotips.pingback.internal.client.DefaultPingSender
 org.phenotips.pingback.internal.client.data.DistributionPingDataProvider
 org.phenotips.pingback.internal.client.data.ExtensionPingDataProvider
 org.phenotips.pingback.internal.client.data.DatePingDataProvider
+org.phenotips.pingback.internal.client.data.IPPingDataProvider
 org.phenotips.pingback.internal.client.data.JavaPingDataProvider
 org.phenotips.pingback.internal.client.data.OsPingDataProvider
 org.phenotips.pingback.internal.client.data.DatabasePingDataProvider
