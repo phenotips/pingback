@@ -54,6 +54,7 @@ import io.searchbox.params.SearchType;
 public class DatePingDataProvider implements PingDataProvider
 {
     private static final String PROPERTY_FIRST_PING_DATE = "firstPingDate";
+
     private static final String PROPERTY_TIMESTAMP = "timestamp";
 
     private static final String PROPERTY_SINCE_DAYS = "sinceDays";
@@ -67,7 +68,7 @@ public class DatePingDataProvider implements PingDataProvider
     private static final String PROPERTY_MIN = "min";
 
     private static final String ERROR_MESSAGE = "Failed to compute the first ping date and the number of elapsed days "
-            + "since the first ping. This information has not been added to the Active Installs ping data. Reason [{}]";
+        + "since the first ping. This information has not been added to the Active Installs ping data. Reason [{}]";
 
     private static final String DATE_TYPE = "date";
 
@@ -81,7 +82,8 @@ public class DatePingDataProvider implements PingDataProvider
     private Logger logger;
 
     @Override
-    public Map<String, Object> provideMapping() {
+    public Map<String, Object> provideMapping()
+    {
         Map<String, Object> propertiesMap = new HashMap<>();
         propertiesMap.put(PROPERTY_TIMESTAMP, Collections.singletonMap(PROPERTY_TYPE, DATE_TYPE));
         propertiesMap.put(PROPERTY_FIRST_PING_DATE, Collections.singletonMap(PROPERTY_TYPE, DATE_TYPE));
@@ -90,15 +92,16 @@ public class DatePingDataProvider implements PingDataProvider
     }
 
     @Override
-    public Map<String, Object> provideData() {
+    public Map<String, Object> provideData()
+    {
         Map<String, Object> jsonMap = new HashMap<>();
         try {
             String instanceId = this.instanceIdManager.getInstanceId().toString();
             Search search = new Search.Builder(constructSearchJSON(instanceId))
-                    .addIndex(JestClientManager.INDEX)
-                    .addType(JestClientManager.TYPE)
-                    .setSearchType(SearchType.COUNT)
-                    .build();
+                .addIndex(JestClientManager.INDEX)
+                .addType(JestClientManager.TYPE)
+                .setSearchType(SearchType.COUNT)
+                .build();
             JestResult result = this.jestClientManager.getClient().execute(search);
 
             if (!result.isSucceeded()) {
@@ -137,16 +140,17 @@ public class DatePingDataProvider implements PingDataProvider
         return jsonMap;
     }
 
-    private String constructSearchJSON(String instanceId) {
+    private String constructSearchJSON(String instanceId)
+    {
         Map<String, Object> jsonMap = new HashMap<>();
 
         jsonMap.put("query", Collections.singletonMap("term", Collections.singletonMap("instanceId", instanceId)));
 
         Map<String, Object> aggsMap = new HashMap<>();
         aggsMap.put(PROPERTY_SERVER_TIME, Collections.singletonMap(PROPERTY_MIN,
-                Collections.singletonMap("script", "time()")));
+            Collections.singletonMap("script", "time()")));
         aggsMap.put(PROPERTY_FIRST_PING_DATE, Collections.singletonMap(PROPERTY_MIN,
-                Collections.singletonMap("field", PROPERTY_TIMESTAMP)));
+            Collections.singletonMap("field", PROPERTY_TIMESTAMP)));
 
         jsonMap.put("aggs", aggsMap);
 
