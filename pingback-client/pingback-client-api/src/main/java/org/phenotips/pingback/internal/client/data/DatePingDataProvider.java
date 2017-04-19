@@ -148,7 +148,7 @@ public class DatePingDataProvider implements PingDataProvider
 
         Map<String, Object> aggsMap = new HashMap<>();
         aggsMap.put(PROPERTY_SERVER_TIME, Collections.singletonMap(PROPERTY_MIN,
-            Collections.singletonMap("script", "time()")));
+            Collections.singletonMap("script", "new Date().time")));
         aggsMap.put(PROPERTY_FIRST_PING_DATE, Collections.singletonMap(PROPERTY_MIN,
             Collections.singletonMap("field", PROPERTY_TIMESTAMP)));
 
