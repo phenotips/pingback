@@ -30,7 +30,8 @@ import io.searchbox.client.JestClientFactory;
 public class XWikiJestClientFactory extends JestClientFactory
 {
     @Override
-    protected HttpClientBuilder configureHttpClient(HttpClientBuilder builder) {
+    protected HttpClientBuilder configureHttpClient(HttpClientBuilder builder)
+    {
         return builder.useSystemProperties();
     }
 }

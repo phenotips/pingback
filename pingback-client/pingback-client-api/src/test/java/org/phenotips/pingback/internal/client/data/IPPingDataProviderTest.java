@@ -35,6 +35,7 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
+
 import static org.mockito.Mockito.when;
 
 /**
@@ -47,47 +48,52 @@ public class IPPingDataProviderTest
 {
     @Rule
     public MockitoComponentMockingRule<IPPingDataProvider> mocker =
-            new MockitoComponentMockingRule<>(IPPingDataProvider.class);
+        new MockitoComponentMockingRule<>(IPPingDataProvider.class);
 
     private LocalTestServer server;
+
     private String serverURL;
 
     @Before
-    public void before() throws Exception {
-        server = new LocalTestServer(null, null);
-        server.start();
-        serverURL = "http:/" + server.getServiceAddress();
+    public void before() throws Exception
+    {
+        this.server = new LocalTestServer(null, null);
+        this.server.start();
+        this.serverURL = "http:/" + this.server.getServiceAddress();
     }
 
     @After
-    public void after() throws Exception {
-        server.stop();
+    public void after() throws Exception
+    {
+        this.server.stop();
     }
 
     @Test
-    public void testProvideMapping() throws Exception {
+    public void testProvideMapping() throws Exception
+    {
         JSONAssert.assertEquals("{\"ip\":{\"type\":\"ip\"}}",
-                new JSONObject(this.mocker.getComponentUnderTest().provideMapping()), false);
+            new JSONObject(this.mocker.getComponentUnderTest().provideMapping()), false);
     }
 
     @Test
-    public void testProvideData() throws Exception {
-        server.register("/*", new HttpRequestHandler()
+    public void testProvideData() throws Exception
+    {
+        this.server.register("/*", new HttpRequestHandler()
         {
             @Override
             public void handle(HttpRequest request, HttpResponse response, HttpContext context)
-                    throws IOException {
+                throws IOException
+            {
                 response.setEntity(new StringEntity("{\"ip\":\"192.168.1.1\"}"));
             }
         });
 
-
         ConfigurationSource configuration = this.mocker.getInstance(ConfigurationSource.class);
         when(configuration.getProperty(IPPingDataProvider.IP_FETCH_URL_PROPERTY))
-                .thenReturn(serverURL + "/get/Stats/Id");
+            .thenReturn(this.serverURL + "/get/Stats/Id");
 
         Map<String, Object> actual = this.mocker.getComponentUnderTest().provideData();
         JSONAssert.assertEquals("{\"ip\":\"192.168.1.1\"}",
-                new JSONObject(actual), false);
+            new JSONObject(actual), false);
     }
 }

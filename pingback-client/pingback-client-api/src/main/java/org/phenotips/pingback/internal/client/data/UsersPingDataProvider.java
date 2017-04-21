@@ -60,7 +60,8 @@ public class UsersPingDataProvider implements PingDataProvider
     private QueryFilter countFilter;
 
     @Override
-    public Map<String, Object> provideMapping() {
+    public Map<String, Object> provideMapping()
+    {
         Map<String, Object> map = new HashMap<>();
         map.put("type", "long");
 
@@ -71,12 +72,13 @@ public class UsersPingDataProvider implements PingDataProvider
     }
 
     @Override
-    public Map<String, Object> provideData() {
+    public Map<String, Object> provideData()
+    {
         Map<String, Object> jsonMap = new HashMap<>();
 
         try {
             Query q = this.qm.createQuery("from doc.object(XWiki.XWikiUsers) as user", Query.XWQL);
-            List<Object> results = q.addFilter(countFilter).execute();
+            List<Object> results = q.addFilter(this.countFilter).execute();
             long count = (long) results.get(0);
             jsonMap.put(PROPERTY_USER_COUNT, count);
         } catch (QueryException e) {
@@ -86,8 +88,9 @@ public class UsersPingDataProvider implements PingDataProvider
         return jsonMap;
     }
 
-    private void logWarning(String explanation, Throwable e) {
+    private void logWarning(String explanation, Throwable e)
+    {
         this.logger.warn("{}. This information has not been added to the Active Installs ping data. Reason [{}]",
-                explanation, ExceptionUtils.getRootCauseMessage(e), e);
+            explanation, ExceptionUtils.getRootCauseMessage(e), e);
     }
 }

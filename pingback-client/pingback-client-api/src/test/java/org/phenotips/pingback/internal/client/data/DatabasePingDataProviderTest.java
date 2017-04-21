@@ -27,12 +27,13 @@ import org.json.JSONObject;
 import org.junit.Rule;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 import com.xpn.xwiki.XWikiContext;
 import com.xpn.xwiki.store.XWikiCacheStoreInterface;
 import com.xpn.xwiki.store.XWikiHibernateStore;
+
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 /**
  * Unit tests for {@link DatabasePingDataProvider}.
@@ -44,18 +45,19 @@ public class DatabasePingDataProviderTest
 {
     @Rule
     public MockitoComponentMockingRule<DatabasePingDataProvider> mocker =
-            new MockitoComponentMockingRule<>(DatabasePingDataProvider.class);
+        new MockitoComponentMockingRule<>(DatabasePingDataProvider.class);
 
     @Test
-    public void provideMapping() throws Exception {
+    public void provideMapping() throws Exception
+    {
         JSONAssert.assertEquals("{\"dbName\":{\"index\":\"not_analyzed\",\"type\":\"string\"},"
-                        + "\"dbVersion\":{\"index\":\"not_analyzed\",\"type\":\"string\"}}",
-                new JSONObject(this.mocker.getComponentUnderTest().provideMapping()), false
-        );
+            + "\"dbVersion\":{\"index\":\"not_analyzed\",\"type\":\"string\"}}",
+            new JSONObject(this.mocker.getComponentUnderTest().provideMapping()), false);
     }
 
     @Test
-    public void provideData() throws Exception {
+    public void provideData() throws Exception
+    {
         Execution execution = this.mocker.getInstance(Execution.class);
         ExecutionContext executionContext = mock(ExecutionContext.class);
         when(execution.getContext()).thenReturn(executionContext);
@@ -73,6 +75,6 @@ public class DatabasePingDataProviderTest
         when(databaseMetaData.getDatabaseProductVersion()).thenReturn("2.2.9");
 
         JSONAssert.assertEquals("{\"dbName\":\"HSQL Database Engine\",\"dbVersion\":\"2.2.9\"}",
-                new JSONObject(this.mocker.getComponentUnderTest().provideData()), false);
+            new JSONObject(this.mocker.getComponentUnderTest().provideData()), false);
     }
 }

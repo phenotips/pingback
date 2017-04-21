@@ -30,9 +30,9 @@ import org.json.JSONObject;
 import org.junit.Rule;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
+
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-import static org.mockito.Mockito.withSettings;
 
 /**
  * Unit tests for {@link DistributionPingDataProvider}.
@@ -44,19 +44,20 @@ public class DistributionPingDataProviderTest
 {
     @Rule
     public MockitoComponentMockingRule<DistributionPingDataProvider> mocker =
-            new MockitoComponentMockingRule<>(DistributionPingDataProvider.class);
+        new MockitoComponentMockingRule<>(DistributionPingDataProvider.class);
 
     @Test
-    public void provideMapping() throws Exception {
+    public void provideMapping() throws Exception
+    {
         JSONAssert.assertEquals("{\"distributionId\":{\"index\":\"not_analyzed\",\"type\":\"string\"},"
-                        + "\"distributionVersion\":{\"index\":\"not_analyzed\",\"type\":\"string\"},"
-                        + "\"instanceId\":{\"index\":\"not_analyzed\",\"type\":\"string\"}}",
-                new JSONObject(this.mocker.getComponentUnderTest().provideMapping()), false
-        );
+            + "\"distributionVersion\":{\"index\":\"not_analyzed\",\"type\":\"string\"},"
+            + "\"instanceId\":{\"index\":\"not_analyzed\",\"type\":\"string\"}}",
+            new JSONObject(this.mocker.getComponentUnderTest().provideMapping()), false);
     }
 
     @Test
-    public void provideData() throws Exception {
+    public void provideData() throws Exception
+    {
         InstanceId id = new InstanceId(UUID.randomUUID().toString());
         InstanceIdManager idManager = this.mocker.getInstance(InstanceIdManager.class);
         when(idManager.getInstanceId()).thenReturn(id);
@@ -68,9 +69,8 @@ public class DistributionPingDataProviderTest
         when(CoreExtensionRepository.getEnvironmentExtension()).thenReturn(environmentExtension);
 
         JSONAssert.assertEquals("{\"distributionId\":\"environmentextensionid\","
-                        + "\"distributionVersion\":\"2.0\","
-                        + "\"instanceId\":\"" + id.getInstanceId() + "\"}",
-                new JSONObject(this.mocker.getComponentUnderTest().provideData()), false
-        );
+            + "\"distributionVersion\":\"2.0\","
+            + "\"instanceId\":\"" + id.getInstanceId() + "\"}",
+            new JSONObject(this.mocker.getComponentUnderTest().provideData()), false);
     }
 }

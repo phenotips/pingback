@@ -61,7 +61,8 @@ public class DatabasePingDataProvider implements PingDataProvider
     private Logger logger;
 
     @Override
-    public Map<String, Object> provideMapping() {
+    public Map<String, Object> provideMapping()
+    {
         Map<String, Object> map = new HashMap<>();
         map.put("type", "string");
         map.put("index", "not_analyzed");
@@ -74,7 +75,8 @@ public class DatabasePingDataProvider implements PingDataProvider
     }
 
     @Override
-    public Map<String, Object> provideData() {
+    public Map<String, Object> provideData()
+    {
         Map<String, Object> jsonMap = new HashMap<>();
         DatabaseMetaData metaData;
         try {
@@ -105,15 +107,17 @@ public class DatabasePingDataProvider implements PingDataProvider
         return jsonMap;
     }
 
-    private void logWarning(String explanation, Throwable e) {
+    private void logWarning(String explanation, Throwable e)
+    {
         this.logger.warn("{}. This information has not been added to the Active Installs ping data. Reason [{}]",
-                explanation, ExceptionUtils.getRootCauseMessage(e), e);
+            explanation, ExceptionUtils.getRootCauseMessage(e), e);
     }
 
-    private DatabaseMetaData getDatabaseMetaData() {
+    private DatabaseMetaData getDatabaseMetaData()
+    {
         DatabaseMetaData metaData = null;
         XWikiContext xcontext =
-                (XWikiContext) this.execution.getContext().getProperty(XWikiContext.EXECUTIONCONTEXT_KEY);
+            (XWikiContext) this.execution.getContext().getProperty(XWikiContext.EXECUTIONCONTEXT_KEY);
         if (xcontext != null) {
             XWikiStoreInterface storeInterface = xcontext.getWiki().getStore();
             if (storeInterface instanceof XWikiCacheStoreInterface) {

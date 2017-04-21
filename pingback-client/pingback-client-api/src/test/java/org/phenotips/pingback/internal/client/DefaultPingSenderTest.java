@@ -23,15 +23,17 @@ import org.xwiki.test.mockito.MockitoComponentMockingRule;
 
 import org.junit.Rule;
 import org.junit.Test;
+
+import com.google.gson.Gson;
+
+import io.searchbox.client.JestClient;
+import io.searchbox.core.DocumentResult;
+import io.searchbox.core.Index;
+
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-
-import com.google.gson.Gson;
-import io.searchbox.client.JestClient;
-import io.searchbox.core.DocumentResult;
-import io.searchbox.core.Index;
 
 /**
  * Unit tests for {@link DefaultPingSender}.
@@ -43,10 +45,11 @@ public class DefaultPingSenderTest
 {
     @Rule
     public MockitoComponentMockingRule<DefaultPingSender> mocker =
-            new MockitoComponentMockingRule<>(DefaultPingSender.class);
+        new MockitoComponentMockingRule<>(DefaultPingSender.class);
 
     @Test
-    public void sendPing() throws Exception {
+    public void sendPing() throws Exception
+    {
         JestClient client = mock(JestClient.class);
         DocumentResult indexResult = new DocumentResult(new Gson());
         indexResult.setSucceeded(true);

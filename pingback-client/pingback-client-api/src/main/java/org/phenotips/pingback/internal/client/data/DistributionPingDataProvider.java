@@ -56,7 +56,8 @@ public class DistributionPingDataProvider implements PingDataProvider
     private InstanceIdManager instanceIdManager;
 
     @Override
-    public Map<String, Object> provideMapping() {
+    public Map<String, Object> provideMapping()
+    {
         Map<String, Object> map = new HashMap<>();
         map.put("type", "string");
         map.put("index", "not_analyzed");
@@ -70,7 +71,8 @@ public class DistributionPingDataProvider implements PingDataProvider
     }
 
     @Override
-    public Map<String, Object> provideData() {
+    public Map<String, Object> provideData()
+    {
         Map<String, Object> jsonMap = new HashMap<>();
 
         String instanceId = this.instanceIdManager.getInstanceId().toString();

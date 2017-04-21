@@ -52,7 +52,8 @@ public class DefaultJestClientManager implements JestClientManager, Initializabl
     private JestClient client;
 
     @Override
-    public void initialize() throws InitializationException {
+    public void initialize() throws InitializationException
+    {
         String pingURL = this.configuration.getPingInstanceURL();
         HttpClientConfig clientConfig = new HttpClientConfig.Builder(pingURL).multiThreaded(true).build();
         JestClientFactory factory = new XWikiJestClientFactory();
@@ -61,14 +62,16 @@ public class DefaultJestClientManager implements JestClientManager, Initializabl
     }
 
     @Override
-    public void dispose() throws ComponentLifecycleException {
+    public void dispose() throws ComponentLifecycleException
+    {
         if (this.client != null) {
             this.client.shutdownClient();
         }
     }
 
     @Override
-    public JestClient getClient() {
+    public JestClient getClient()
+    {
         return this.client;
     }
 }

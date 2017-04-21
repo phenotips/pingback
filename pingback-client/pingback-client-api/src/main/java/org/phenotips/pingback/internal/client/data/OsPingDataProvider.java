@@ -45,7 +45,8 @@ public class OsPingDataProvider implements PingDataProvider
     private static final String PROPERTY_OS_VERSION = "osVersion";
 
     @Override
-    public Map<String, Object> provideMapping() {
+    public Map<String, Object> provideMapping()
+    {
         Map<String, Object> map = new HashMap<>();
         map.put("type", "string");
         map.put("index", "not_analyzed");
@@ -59,7 +60,8 @@ public class OsPingDataProvider implements PingDataProvider
     }
 
     @Override
-    public Map<String, Object> provideData() {
+    public Map<String, Object> provideData()
+    {
         Map<String, Object> jsonMap = new HashMap<>();
         jsonMap.put(PROPERTY_OS_ARCH, System.getProperty("os.arch"));
         jsonMap.put(PROPERTY_OS_NAME, System.getProperty("os.name"));

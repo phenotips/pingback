@@ -53,7 +53,9 @@ import org.slf4j.Logger;
 public class IPPingDataProvider implements PingDataProvider
 {
     static final String IP_FETCH_URL_PROPERTY = "activeinstalls.ipFetchURL";
+
     private static final String PROPERTY_IP = "ip";
+
     @Inject
     private Logger logger;
 
@@ -63,7 +65,8 @@ public class IPPingDataProvider implements PingDataProvider
     private CloseableHttpClient client = HttpClients.createSystem();
 
     @Override
-    public Map<String, Object> provideMapping() {
+    public Map<String, Object> provideMapping()
+    {
         Map<String, Object> map = new HashMap<>();
         map.put("type", PROPERTY_IP);
 
@@ -74,12 +77,13 @@ public class IPPingDataProvider implements PingDataProvider
     }
 
     @Override
-    public Map<String, Object> provideData() {
+    public Map<String, Object> provideData()
+    {
         Map<String, Object> jsonMap = new HashMap<>();
 
         CloseableHttpResponse response = null;
         try {
-            String uri = configuration.getProperty(IP_FETCH_URL_PROPERTY);
+            String uri = this.configuration.getProperty(IP_FETCH_URL_PROPERTY);
             HttpGet method = new HttpGet(uri);
             RequestConfig config = RequestConfig.custom().setSocketTimeout(2000).build();
             method.setConfig(config);
@@ -105,10 +109,10 @@ public class IPPingDataProvider implements PingDataProvider
         return jsonMap;
     }
 
-    private void logWarning(String explanation, Throwable e) {
+    private void logWarning(String explanation, Throwable e)
+    {
         this.logger.warn("{}. This information has not been added to the Active Installs ping data. Reason [{}]",
-                explanation, ExceptionUtils.getRootCauseMessage(e), e);
+            explanation, ExceptionUtils.getRootCauseMessage(e), e);
     }
-
 
 }

@@ -43,7 +43,8 @@ public class JavaPingDataProvider implements PingDataProvider
     private static final String PROPERTY_JAVA_VERSION = "javaVersion";
 
     @Override
-    public Map<String, Object> provideMapping() {
+    public Map<String, Object> provideMapping()
+    {
         Map<String, Object> map = new HashMap<>();
         map.put("type", "string");
         map.put("index", "not_analyzed");
@@ -56,7 +57,8 @@ public class JavaPingDataProvider implements PingDataProvider
     }
 
     @Override
-    public Map<String, Object> provideData() {
+    public Map<String, Object> provideData()
+    {
         Map<String, Object> jsonMap = new HashMap<>();
         jsonMap.put(PROPERTY_JAVA_VENDOR, System.getProperty("java.vendor"));
         jsonMap.put(PROPERTY_JAVA_VERSION, System.getProperty("java.version"));

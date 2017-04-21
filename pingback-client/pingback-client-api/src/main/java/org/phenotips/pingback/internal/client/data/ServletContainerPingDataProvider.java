@@ -64,7 +64,8 @@ public class ServletContainerPingDataProvider implements PingDataProvider
     private Logger logger;
 
     @Override
-    public Map<String, Object> provideMapping() {
+    public Map<String, Object> provideMapping()
+    {
         Map<String, Object> map = new HashMap<>();
         map.put("type", "string");
         map.put("index", "not_analyzed");
@@ -77,7 +78,8 @@ public class ServletContainerPingDataProvider implements PingDataProvider
     }
 
     @Override
-    public Map<String, Object> provideData() {
+    public Map<String, Object> provideData()
+    {
         Map<String, Object> jsonMap = new HashMap<>();
         if (this.environment instanceof ServletEnvironment) {
             ServletEnvironment servletEnvironment = (ServletEnvironment) this.environment;
@@ -86,17 +88,16 @@ public class ServletContainerPingDataProvider implements PingDataProvider
                 // Format of getServerInfo() is "name/version (text)" where " (text)" is optional.
                 String serverInfo = servletContext.getServerInfo();
                 jsonMap.put(PROPERTY_SERVLET_CONTAINER_NAME,
-                        StringUtils.trim(StringUtils.substringBefore(serverInfo, SERVLET_INFO_VERSION_SEPARATOR)));
+                    StringUtils.trim(StringUtils.substringBefore(serverInfo, SERVLET_INFO_VERSION_SEPARATOR)));
                 jsonMap.put(PROPERTY_SERVLET_CONTAINER_VERSION, StringUtils.trim(StringUtils.substringBefore(
-                        StringUtils.substringAfter(serverInfo, SERVLET_INFO_VERSION_SEPARATOR),
-                        SERVLET_INFO_OPTIONALSEPARATOR)));
+                    StringUtils.substringAfter(serverInfo, SERVLET_INFO_VERSION_SEPARATOR),
+                    SERVLET_INFO_OPTIONALSEPARATOR)));
             } catch (Throwable e) {
                 // Ignore, we just don't save that information...
                 // However we log a warning since it's a problem that needs to be seen and looked at.
                 this.logger.warn("Failed to compute Servlet container information. "
-                                + "This information has not been added to the Active Installs ping data. Reason [{}]",
-                        ExceptionUtils.getRootCauseMessage(e), e
-                );
+                    + "This information has not been added to the Active Installs ping data. Reason [{}]",
+                    ExceptionUtils.getRootCauseMessage(e), e);
             }
         }
         return jsonMap;

@@ -52,7 +52,8 @@ public class DefaultActiveInstallsConfiguration implements ActiveInstallsConfigu
     private ConfigurationSource configuration;
 
     @Override
-    public String getPingInstanceURL() {
+    public String getPingInstanceURL()
+    {
         return this.configuration.getProperty(PREFIX + "pingURL", DEFAULT_PING_URL);
     }
 }

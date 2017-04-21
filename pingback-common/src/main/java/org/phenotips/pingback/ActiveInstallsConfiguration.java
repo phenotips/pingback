@@ -30,7 +30,7 @@ public interface ActiveInstallsConfiguration
 {
     /**
      * @return the URL (as a string) of where the Active Installs module should connect to in order to send a ping of
-     * activity
+     *         activity
      */
     String getPingInstanceURL();
 }

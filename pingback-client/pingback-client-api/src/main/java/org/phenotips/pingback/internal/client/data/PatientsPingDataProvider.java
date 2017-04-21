@@ -60,7 +60,8 @@ public class PatientsPingDataProvider implements PingDataProvider
     private QueryFilter countFilter;
 
     @Override
-    public Map<String, Object> provideMapping() {
+    public Map<String, Object> provideMapping()
+    {
         Map<String, Object> map = new HashMap<>();
         map.put("type", "long");
 
@@ -71,14 +72,16 @@ public class PatientsPingDataProvider implements PingDataProvider
     }
 
     @Override
-    public Map<String, Object> provideData() {
+    public Map<String, Object> provideData()
+    {
         Map<String, Object> jsonMap = new HashMap<>();
 
         try {
             Query q = this.qm.createQuery(
-                    "from doc.object(PhenoTips.PatientClass) as patient "
-                            + "where patient.name<>'PhenoTips.PatientTemplate'", Query.XWQL);
-            List<Object> results = q.addFilter(countFilter).execute();
+                "from doc.object(PhenoTips.PatientClass) as patient "
+                    + "where patient.name<>'PhenoTips.PatientTemplate'",
+                Query.XWQL);
+            List<Object> results = q.addFilter(this.countFilter).execute();
             long count = (long) results.get(0);
             jsonMap.put(PROPERTY_PATIENT_COUNT, count);
         } catch (QueryException e) {
@@ -88,8 +91,9 @@ public class PatientsPingDataProvider implements PingDataProvider
         return jsonMap;
     }
 
-    private void logWarning(String explanation, Throwable e) {
+    private void logWarning(String explanation, Throwable e)
+    {
         this.logger.warn("{}. This information has not been added to the Active Installs ping data. Reason [{}]",
-                explanation, ExceptionUtils.getRootCauseMessage(e), e);
+            explanation, ExceptionUtils.getRootCauseMessage(e), e);
     }
 }

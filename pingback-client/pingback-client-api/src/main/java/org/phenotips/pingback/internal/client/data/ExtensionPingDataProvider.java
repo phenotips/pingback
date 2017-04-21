@@ -56,7 +56,8 @@ public class ExtensionPingDataProvider implements PingDataProvider
     private InstalledExtensionRepository extensionRepository;
 
     @Override
-    public Map<String, Object> provideMapping() {
+    public Map<String, Object> provideMapping()
+    {
         Map<String, Object> map = new HashMap<>();
         map.put("type", "string");
         map.put("index", "not_analyzed");
@@ -66,11 +67,12 @@ public class ExtensionPingDataProvider implements PingDataProvider
         propertiesMap.put(PROPERTY_VERSION, map);
 
         return Collections.singletonMap(PROPERTY_EXTENSIONS,
-                (Object) Collections.singletonMap("properties", propertiesMap));
+            (Object) Collections.singletonMap("properties", propertiesMap));
     }
 
     @Override
-    public Map<String, Object> provideData() {
+    public Map<String, Object> provideData()
+    {
         Collection<InstalledExtension> installedExtensions = this.extensionRepository.getInstalledExtensions();
         JSONObject[] extensions = new JSONObject[installedExtensions.size()];
         Iterator<InstalledExtension> it = installedExtensions.iterator();

@@ -28,6 +28,7 @@ import org.json.JSONObject;
 import org.junit.Rule;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
+
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -41,18 +42,19 @@ public class ExtensionPingDataProviderTest
 {
     @Rule
     public MockitoComponentMockingRule<ExtensionPingDataProvider> mocker =
-            new MockitoComponentMockingRule<>(ExtensionPingDataProvider.class);
+        new MockitoComponentMockingRule<>(ExtensionPingDataProvider.class);
 
     @Test
-    public void provideMapping() throws Exception {
+    public void provideMapping() throws Exception
+    {
         JSONAssert.assertEquals("{\"extensions\":{\"properties\":{\"id\":{\"index\":\"not_analyzed\","
-                        + "\"type\":\"string\"},\"version\":{\"index\":\"not_analyzed\",\"type\":\"string\"}}}}",
-                new JSONObject(this.mocker.getComponentUnderTest().provideMapping()), false
-        );
+            + "\"type\":\"string\"},\"version\":{\"index\":\"not_analyzed\",\"type\":\"string\"}}}}",
+            new JSONObject(this.mocker.getComponentUnderTest().provideMapping()), false);
     }
 
     @Test
-    public void provideData() throws Exception {
+    public void provideData() throws Exception
+    {
         ExtensionId extensionId = new ExtensionId("extensionid", "1.0");
         InstalledExtension extension = mock(InstalledExtension.class);
         when(extension.getId()).thenReturn(extensionId);
@@ -61,6 +63,6 @@ public class ExtensionPingDataProviderTest
         when(repository.getInstalledExtensions()).thenReturn(Collections.singletonList(extension));
 
         JSONAssert.assertEquals("{\"extensions\":[{\"id\":\"extensionid\",\"version\":\"1.0\"}]}",
-                new JSONObject(this.mocker.getComponentUnderTest().provideData()), false);
+            new JSONObject(this.mocker.getComponentUnderTest().provideData()), false);
     }
 }

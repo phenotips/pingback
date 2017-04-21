@@ -30,15 +30,17 @@ import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
-import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonParser;
+
 import io.searchbox.client.JestClient;
 import io.searchbox.core.Search;
 import io.searchbox.core.SearchResult;
+
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 /**
  * Unit tests for {@link DatePingDataProvider}.
@@ -50,16 +52,19 @@ public class DatePingDataProviderTest
 {
     @Rule
     public MockitoComponentMockingRule<DatePingDataProvider> mocker =
-            new MockitoComponentMockingRule<>(DatePingDataProvider.class);
+        new MockitoComponentMockingRule<>(DatePingDataProvider.class);
 
     @Test
-    public void provideMapping() throws Exception {
-        JSONAssert.assertEquals("{\"timestamp\":{\"type\":\"date\"},\"sinceDays\":{\"type\":\"long\"},\"firstPingDate\":{\"type\":\"date\"}}",
-                new JSONObject(this.mocker.getComponentUnderTest().provideMapping()), false);
+    public void provideMapping() throws Exception
+    {
+        JSONAssert.assertEquals(
+            "{\"timestamp\":{\"type\":\"date\"},\"sinceDays\":{\"type\":\"long\"},\"firstPingDate\":{\"type\":\"date\"}}",
+            new JSONObject(this.mocker.getComponentUnderTest().provideMapping()), false);
     }
 
     @Test
-    public void provideData() throws Exception {
+    public void provideData() throws Exception
+    {
         InstanceId id = new InstanceId(UUID.randomUUID().toString());
         InstanceIdManager idManager = this.mocker.getInstance(InstanceIdManager.class);
         when(idManager.getInstanceId()).thenReturn(id);
@@ -67,27 +72,27 @@ public class DatePingDataProviderTest
         JestClient client = mock(JestClient.class);
         SearchResult searchResult = new SearchResult(new Gson());
         String resultString = "{\n" +
-                "   \"took\": 4,\n" +
-                "   \"timed_out\": false,\n" +
-                "   \"_shards\": {\n" +
-                "      \"total\": 5,\n" +
-                "      \"successful\": 5,\n" +
-                "      \"failed\": 0\n" +
-                "   },\n" +
-                "   \"hits\": {\n" +
-                "      \"total\": 2,\n" +
-                "      \"max_score\": 0,\n" +
-                "      \"hits\": []\n" +
-                "   },\n" +
-                "   \"aggregations\": {\n" +
-                "      \"firstPingDate\": {\n" +
-                "         \"value\": 1392854400000\n" +
-                "      },\n" +
-                "      \"serverTime\": {\n" +
-                "         \"value\": 1393200000000\n" +
-                "      }\n" +
-                "   }\n" +
-                "}";
+            "   \"took\": 4,\n" +
+            "   \"timed_out\": false,\n" +
+            "   \"_shards\": {\n" +
+            "      \"total\": 5,\n" +
+            "      \"successful\": 5,\n" +
+            "      \"failed\": 0\n" +
+            "   },\n" +
+            "   \"hits\": {\n" +
+            "      \"total\": 2,\n" +
+            "      \"max_score\": 0,\n" +
+            "      \"hits\": []\n" +
+            "   },\n" +
+            "   \"aggregations\": {\n" +
+            "      \"firstPingDate\": {\n" +
+            "         \"value\": 1392854400000\n" +
+            "      },\n" +
+            "      \"serverTime\": {\n" +
+            "         \"value\": 1393200000000\n" +
+            "      }\n" +
+            "   }\n" +
+            "}";
         searchResult.setJsonString(resultString);
         searchResult.setJsonObject(new JsonParser().parse(resultString).getAsJsonObject());
         searchResult.setSucceeded(true);
@@ -101,6 +106,6 @@ public class DatePingDataProviderTest
         Assert.assertTrue("Timestamp present", jsonObject.has("timestamp"));
         jsonObject.remove("timestamp");
         JSONAssert.assertEquals("{\"sinceDays\":4,\"firstPingDate\":1392854400000}",
-                jsonObject, false);
+            jsonObject, false);
     }
 }

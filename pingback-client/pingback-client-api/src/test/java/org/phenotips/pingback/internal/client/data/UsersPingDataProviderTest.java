@@ -30,6 +30,7 @@ import org.json.JSONObject;
 import org.junit.Rule;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
+
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
@@ -45,16 +46,18 @@ public class UsersPingDataProviderTest
 {
     @Rule
     public MockitoComponentMockingRule<UsersPingDataProvider> mocker =
-            new MockitoComponentMockingRule<>(UsersPingDataProvider.class);
+        new MockitoComponentMockingRule<>(UsersPingDataProvider.class);
 
     @Test
-    public void testProvideMapping() throws Exception {
+    public void testProvideMapping() throws Exception
+    {
         JSONAssert.assertEquals("{\"userCount\":{\"type\":\"long\"}}",
-                new JSONObject(this.mocker.getComponentUnderTest().provideMapping()), false);
+            new JSONObject(this.mocker.getComponentUnderTest().provideMapping()), false);
     }
 
     @Test
-    public void testProvideData() throws Exception {
+    public void testProvideData() throws Exception
+    {
         Query q = mock(DefaultQuery.class);
         when(q.addFilter(any(QueryFilter.class))).thenReturn(q);
         when(q.execute()).thenReturn(new ArrayList(Collections.singleton(12L)));
@@ -63,6 +66,6 @@ public class UsersPingDataProviderTest
         when(qm.createQuery(anyString(), anyString())).thenReturn(q);
 
         JSONAssert.assertEquals("{\"userCount\":12}",
-                new JSONObject(this.mocker.getComponentUnderTest().provideData()), false);
+            new JSONObject(this.mocker.getComponentUnderTest().provideData()), false);
     }
 }

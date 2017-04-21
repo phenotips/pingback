@@ -80,17 +80,20 @@ public class ActiveInstallsInitializerListener implements EventListener
     private ActiveInstallsConfiguration configuration;
 
     @Override
-    public List<Event> getEvents() {
+    public List<Event> getEvents()
+    {
         return EVENTS;
     }
 
     @Override
-    public String getName() {
+    public String getName()
+    {
         return "ActiveInstallsInitializerListener";
     }
 
     @Override
-    public void onEvent(Event event, Object source, Object data) {
+    public void onEvent(Event event, Object source, Object data)
+    {
         // Ensure that the instance id is initialized and available.
         this.instanceIdManagerProvider.get().initializeInstanceId();
 

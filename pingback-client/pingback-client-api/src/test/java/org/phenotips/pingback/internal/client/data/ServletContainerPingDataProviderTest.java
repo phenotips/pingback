@@ -27,6 +27,7 @@ import org.json.JSONObject;
 import org.junit.Rule;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
+
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -40,18 +41,19 @@ public class ServletContainerPingDataProviderTest
 {
     @Rule
     public MockitoComponentMockingRule<ServletContainerPingDataProvider> mocker =
-            new MockitoComponentMockingRule<>(ServletContainerPingDataProvider.class);
+        new MockitoComponentMockingRule<>(ServletContainerPingDataProvider.class);
 
     @Test
-    public void provideMapping() throws Exception {
+    public void provideMapping() throws Exception
+    {
         JSONAssert.assertEquals("{\"servletContainerVersion\":{\"index\":\"not_analyzed\",\"type\":\"string\"},"
-                        + "\"servletContainerName\":{\"index\":\"not_analyzed\",\"type\":\"string\"}}",
-                new JSONObject(this.mocker.getComponentUnderTest().provideMapping()), false
-        );
+            + "\"servletContainerName\":{\"index\":\"not_analyzed\",\"type\":\"string\"}}",
+            new JSONObject(this.mocker.getComponentUnderTest().provideMapping()), false);
     }
 
     @Test
-    public void provideData() throws Exception {
+    public void provideData() throws Exception
+    {
         ServletEnvironment servletEnvironment = mock(ServletEnvironment.class);
         ReflectionUtils.setFieldValue(this.mocker.getComponentUnderTest(), "environment", servletEnvironment);
 
@@ -60,6 +62,6 @@ public class ServletContainerPingDataProviderTest
         when(servletContext.getServerInfo()).thenReturn("Apache Tomcat/7.0.4 (optional text)");
 
         JSONAssert.assertEquals("{\"servletContainerVersion\":\"7.0.4\",\"servletContainerName\":\"Apache Tomcat\"}",
-                new JSONObject(this.mocker.getComponentUnderTest().provideData()), false);
+            new JSONObject(this.mocker.getComponentUnderTest().provideData()), false);
     }
 }
