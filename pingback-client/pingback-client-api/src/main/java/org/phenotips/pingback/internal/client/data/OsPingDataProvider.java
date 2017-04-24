@@ -31,7 +31,7 @@ import javax.inject.Singleton;
  * Provide the Operating System's architecture, name and version.
  *
  * @version $Id$
- * @since 6.1M1
+ * @since 1.0
  */
 @Component
 @Named("os")

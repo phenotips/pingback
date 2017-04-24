@@ -39,7 +39,7 @@ import org.slf4j.Logger;
  * Provide the Servlet Container's name and version.
  *
  * @version $Id$
- * @since 6.1M1
+ * @since 1.0
  */
 @Component
 @Named("servlet")

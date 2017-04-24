@@ -38,7 +38,7 @@ import javax.inject.Singleton;
  * Provide the instance's unique id and distribution id and version.
  *
  * @version $Id$
- * @since 6.1M1
+ * @since 1.0
  */
 @Component
 @Named("distribution")

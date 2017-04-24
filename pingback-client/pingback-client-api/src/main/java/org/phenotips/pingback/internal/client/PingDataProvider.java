@@ -25,7 +25,7 @@ import java.util.Map;
  * Allows providing additional data in the ping sent to the server.
  *
  * @version $Id$
- * @since 6.1M1
+ * @since 1.0
  */
 @Role
 public interface PingDataProvider

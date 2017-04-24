@@ -37,7 +37,7 @@ import io.searchbox.client.config.HttpClientConfig;
  * Active Install configuration.
  *
  * @version $Id$
- * @since 5.2M2
+ * @since 1.0
  */
 @Component
 @Singleton

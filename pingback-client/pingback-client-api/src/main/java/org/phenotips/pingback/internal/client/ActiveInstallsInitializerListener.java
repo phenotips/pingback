@@ -38,7 +38,7 @@ import javax.inject.Singleton;
  * Used to trigger a Thread to periodically send a ping to the remote instance that stores it.
  *
  * @version $Id$
- * @since 5.2M2
+ * @since 1.0
  */
 @Component
 @Singleton

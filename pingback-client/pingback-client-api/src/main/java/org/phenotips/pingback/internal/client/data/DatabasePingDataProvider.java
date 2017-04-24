@@ -43,7 +43,7 @@ import com.xpn.xwiki.store.XWikiStoreInterface;
  * Provide database name and version.
  *
  * @version $Id$
- * @since 6.1M1
+ * @since 1.0
  */
 @Component
 @Named("database")

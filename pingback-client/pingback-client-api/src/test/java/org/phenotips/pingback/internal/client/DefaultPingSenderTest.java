@@ -39,7 +39,7 @@ import static org.mockito.Mockito.when;
  * Unit tests for {@link DefaultPingSender}.
  *
  * @version $Id$
- * @since 5.2M2
+ * @since 1.0
  */
 public class DefaultPingSenderTest
 {

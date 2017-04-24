@@ -24,7 +24,7 @@ import org.xwiki.component.annotation.Role;
  * installations out there.
  *
  * @version $Id$
- * @since 5.2M2
+ * @since 1.0
  */
 @Role
 public interface PingSender

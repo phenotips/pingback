@@ -39,7 +39,7 @@ import org.json.JSONObject;
  * Provide the list of installed extensions and their versions.
  *
  * @version $Id$
- * @since 6.1M1
+ * @since 1.0
  */
 @Component
 @Named("extensions")

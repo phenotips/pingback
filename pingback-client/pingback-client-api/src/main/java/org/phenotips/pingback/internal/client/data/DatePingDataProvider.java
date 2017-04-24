@@ -46,7 +46,7 @@ import io.searchbox.params.SearchType;
  * is used: < 1 day, 2-7 days, 7-30 days, 30-365 days, > 365 days).
  *
  * @version $Id$
- * @since 6.1M1
+ * @since 1.0
  */
 @Component
 @Named("date")

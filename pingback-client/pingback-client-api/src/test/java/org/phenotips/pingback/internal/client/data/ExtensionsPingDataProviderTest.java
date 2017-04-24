@@ -38,7 +38,6 @@ import static org.mockito.Mockito.when;
  * Unit tests for {@link ExtensionsPingDataProvider}.
  *
  * @version $Id$
- * @since 6.1M1
  */
 public class ExtensionsPingDataProviderTest
 {

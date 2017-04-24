@@ -25,7 +25,7 @@ import io.searchbox.client.JestClient;
  * Factory to get the {@link JestClient} instance to connect to the remote instance.
  *
  * @version $Id$
- * @since 5.2M2
+ * @since 1.0
  */
 @Role
 public interface JestClientManager

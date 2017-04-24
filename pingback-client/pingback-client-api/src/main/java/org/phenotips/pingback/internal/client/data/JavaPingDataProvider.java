@@ -31,7 +31,7 @@ import javax.inject.Singleton;
  * Provide the JVM's vendor and version.
  *
  * @version $Id$
- * @since 6.1M1
+ * @since 1.0
  */
 @Component
 @Named("java")

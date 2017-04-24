@@ -29,7 +29,7 @@ import javax.inject.Singleton;
  * All configuration options for the Active Installs module.
  *
  * @version $Id$
- * @since 5.2M2
+ * @since 1.0
  */
 @Component
 @Singleton

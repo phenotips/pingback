@@ -24,7 +24,7 @@ import org.xwiki.stability.Unstable;
  * Configuration properties for the Active Installs module.
  *
  * @version $Id$
- * @since 5.2M2
+ * @since 1.0
  */
 @Role
 public interface ActiveInstallsConfiguration
@@ -37,7 +37,7 @@ public interface ActiveInstallsConfiguration
 
     /**
      * @return the user agent to use when sending pings to the remote server
-     * @since 9.0RC1
+     * @since 1.1
      */
     @Unstable
     String getUserAgent();

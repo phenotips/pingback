@@ -31,7 +31,7 @@ import com.xpn.xwiki.util.AbstractXWikiRunnable;
  * installs of XWiki (and to know what extensions and in which versions they use).
  *
  * @version $Id$
- * @since 5.2M2
+ * @since 1.0
  */
 public class ActiveInstallsPingThread extends AbstractXWikiRunnable
 {

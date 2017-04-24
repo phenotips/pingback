@@ -41,7 +41,6 @@ import static org.mockito.Mockito.when;
  * Unit tests for {@link DatabasePingDataProvider}.
  *
  * @version $Id$
- * @since 6.1M1
  */
 public class DatabasePingDataProviderTest
 {
