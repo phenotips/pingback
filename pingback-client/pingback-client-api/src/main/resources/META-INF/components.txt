@@ -1,13 +1,13 @@
 org.phenotips.pingback.internal.client.ActiveInstallsInitializerListener
 org.phenotips.pingback.internal.client.DefaultPingSender
-org.phenotips.pingback.internal.client.data.DistributionPingDataProvider
-org.phenotips.pingback.internal.client.data.ExtensionPingDataProvider
+org.phenotips.pingback.internal.client.data.DatabasePingDataProvider
 org.phenotips.pingback.internal.client.data.DatePingDataProvider
+org.phenotips.pingback.internal.client.data.DistributionPingDataProvider
+org.phenotips.pingback.internal.client.data.ExtensionsPingDataProvider
 org.phenotips.pingback.internal.client.data.IPPingDataProvider
 org.phenotips.pingback.internal.client.data.JavaPingDataProvider
 org.phenotips.pingback.internal.client.data.MemoryPingDataProvider
 org.phenotips.pingback.internal.client.data.OsPingDataProvider
-org.phenotips.pingback.internal.client.data.DatabasePingDataProvider
+org.phenotips.pingback.internal.client.data.PatientsPingDataProvider
 org.phenotips.pingback.internal.client.data.ServletContainerPingDataProvider
 org.phenotips.pingback.internal.client.data.UsersPingDataProvider
-org.phenotips.pingback.internal.client.data.PatientsPingDataProvider
