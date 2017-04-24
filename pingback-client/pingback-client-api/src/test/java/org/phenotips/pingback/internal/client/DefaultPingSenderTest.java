@@ -66,4 +66,18 @@ public class DefaultPingSenderTest
         verify(pingDataProvider).provideMapping();
         verify(pingDataProvider).provideData();
     }
+
+    @Test(expected = Exception.class)
+    public void sendPingFailureThrowsException() throws Exception
+    {
+        JestClient client = mock(JestClient.class);
+        DocumentResult indexResult = new DocumentResult(new Gson());
+        indexResult.setSucceeded(false);
+        when(client.execute(any(Index.class))).thenReturn(indexResult);
+
+        JestClientManager jestManager = this.mocker.getInstance(JestClientManager.class);
+        when(jestManager.getClient()).thenReturn(client);
+
+        this.mocker.getComponentUnderTest().sendPing();
+    }
 }

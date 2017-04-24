@@ -33,6 +33,7 @@ import javax.inject.Singleton;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
+import org.apache.http.HttpStatus;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -89,6 +90,9 @@ public class IPPingDataProvider implements PingDataProvider
             RequestConfig config = RequestConfig.custom().setSocketTimeout(2000).build();
             method.setConfig(config);
             response = this.client.execute(method);
+            if (response.getStatusLine().getStatusCode() != HttpStatus.SC_OK) {
+                return jsonMap;
+            }
             JSONObject obj =
                 new JSONObject(IOUtils.toString(response.getEntity().getContent(), StandardCharsets.UTF_8));
 

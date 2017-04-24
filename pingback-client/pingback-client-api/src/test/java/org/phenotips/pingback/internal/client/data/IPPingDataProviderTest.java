@@ -93,4 +93,51 @@ public class IPPingDataProviderTest extends LocalServerTestBase
         JSONAssert.assertEquals("{\"ip\":\"192.168.1.1\"}",
             new JSONObject(actual), false);
     }
+
+    @Test
+    public void notFoundResponseReturnsEmptyData() throws Exception
+    {
+        this.serverBootstrap.registerHandler("/*", new HttpRequestHandler()
+        {
+            @Override
+            public void handle(HttpRequest request, HttpResponse response, HttpContext context)
+                throws IOException
+            {
+                response.setStatusCode(403);
+                response.setEntity(new StringEntity("Not found"));
+            }
+        });
+
+        HttpHost host = super.start();
+
+        ConfigurationSource configuration = this.mocker.getInstance(ConfigurationSource.class);
+        when(configuration.getProperty(IPPingDataProvider.IP_FETCH_URL_PROPERTY))
+            .thenReturn(host.toURI() + "/get/Stats/Id");
+
+        Map<String, Object> actual = this.mocker.getComponentUnderTest().provideData();
+        JSONAssert.assertEquals("{}", new JSONObject(actual), false);
+    }
+
+    @Test
+    public void requestErrorReturnsEmptyData() throws Exception
+    {
+        this.serverBootstrap.registerHandler("/*", new HttpRequestHandler()
+        {
+            @Override
+            public void handle(HttpRequest request, HttpResponse response, HttpContext context)
+                throws IOException
+            {
+                throw new IOException("failed");
+            }
+        });
+
+        HttpHost host = super.start();
+
+        ConfigurationSource configuration = this.mocker.getInstance(ConfigurationSource.class);
+        when(configuration.getProperty(IPPingDataProvider.IP_FETCH_URL_PROPERTY))
+            .thenReturn(host.toURI() + "/get/Stats/Id");
+
+        Map<String, Object> actual = this.mocker.getComponentUnderTest().provideData();
+        JSONAssert.assertEquals("{}", new JSONObject(actual), false);
+    }
 }

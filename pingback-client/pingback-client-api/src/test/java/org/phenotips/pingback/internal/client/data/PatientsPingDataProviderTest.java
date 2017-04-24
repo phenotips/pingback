@@ -20,6 +20,7 @@ package org.phenotips.pingback.internal.client.data;
 import org.phenotips.pingback.internal.client.PingDataProvider;
 
 import org.xwiki.query.Query;
+import org.xwiki.query.QueryException;
 import org.xwiki.query.QueryFilter;
 import org.xwiki.query.QueryManager;
 import org.xwiki.query.internal.DefaultQuery;
@@ -67,5 +68,18 @@ public class PatientsPingDataProviderTest
 
         JSONAssert.assertEquals("{\"patients\":12}",
             new JSONObject(this.mocker.getComponentUnderTest().provideData()), false);
+    }
+
+    @Test
+    public void queryExceptionReturnsEmptyData() throws Exception
+    {
+        Query q = mock(DefaultQuery.class);
+        when(q.addFilter(any(QueryFilter.class))).thenReturn(q);
+        when(q.execute()).thenThrow(new QueryException("failed", q, null));
+
+        QueryManager qm = this.mocker.getInstance(QueryManager.class);
+        when(qm.createQuery(anyString(), anyString())).thenReturn(q);
+
+        JSONAssert.assertEquals("{}", new JSONObject(this.mocker.getComponentUnderTest().provideData()), false);
     }
 }
