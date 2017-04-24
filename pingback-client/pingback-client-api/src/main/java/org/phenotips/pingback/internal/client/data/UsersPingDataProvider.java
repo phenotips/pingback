@@ -37,7 +37,7 @@ import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.slf4j.Logger;
 
 /**
- * Provide database name and version.
+ * Provide the number of users.
  *
  * @version $Id$
  * @since 1.0
@@ -47,7 +47,7 @@ import org.slf4j.Logger;
 @Singleton
 public class UsersPingDataProvider implements PingDataProvider
 {
-    private static final String PROPERTY_USER_COUNT = "userCount";
+    private static final String PROPERTY_USER_COUNT = "users";
 
     @Inject
     private Logger logger;

@@ -52,7 +52,7 @@ public class UsersPingDataProviderTest
     @Test
     public void testProvideMapping() throws Exception
     {
-        JSONAssert.assertEquals("{\"userCount\":{\"type\":\"long\"}}",
+        JSONAssert.assertEquals("{\"users\":{\"type\":\"long\"}}",
             new JSONObject(this.mocker.getComponentUnderTest().provideMapping()), false);
     }
 
@@ -66,7 +66,7 @@ public class UsersPingDataProviderTest
         QueryManager qm = this.mocker.getInstance(QueryManager.class);
         when(qm.createQuery(anyString(), anyString())).thenReturn(q);
 
-        JSONAssert.assertEquals("{\"userCount\":12}",
+        JSONAssert.assertEquals("{\"users\":12}",
             new JSONObject(this.mocker.getComponentUnderTest().provideData()), false);
     }
 }

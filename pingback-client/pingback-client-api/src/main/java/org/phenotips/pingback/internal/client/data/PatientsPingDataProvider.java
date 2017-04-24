@@ -37,7 +37,7 @@ import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.slf4j.Logger;
 
 /**
- * Provide database name and version.
+ * Provide the number of patient records.
  *
  * @version $Id$
  * @since 1.0
@@ -47,7 +47,7 @@ import org.slf4j.Logger;
 @Singleton
 public class PatientsPingDataProvider implements PingDataProvider
 {
-    private static final String PROPERTY_PATIENT_COUNT = "patientCount";
+    private static final String PROPERTY_PATIENT_COUNT = "patients";
 
     @Inject
     private Logger logger;
