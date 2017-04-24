@@ -18,6 +18,7 @@
 package org.phenotips.pingback.internal.client.data;
 
 import org.phenotips.pingback.internal.JestClientManager;
+import org.phenotips.pingback.internal.client.PingDataProvider;
 
 import org.xwiki.instance.InstanceId;
 import org.xwiki.instance.InstanceIdManager;
@@ -51,8 +52,8 @@ import static org.mockito.Mockito.when;
 public class DatePingDataProviderTest
 {
     @Rule
-    public MockitoComponentMockingRule<DatePingDataProvider> mocker =
-        new MockitoComponentMockingRule<>(DatePingDataProvider.class);
+    public MockitoComponentMockingRule<PingDataProvider> mocker =
+        new MockitoComponentMockingRule<PingDataProvider>(DatePingDataProvider.class);
 
     @Test
     public void provideMapping() throws Exception

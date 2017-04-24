@@ -44,8 +44,8 @@ import static org.mockito.Mockito.when;
 public class DefaultPingSenderTest
 {
     @Rule
-    public MockitoComponentMockingRule<DefaultPingSender> mocker =
-        new MockitoComponentMockingRule<>(DefaultPingSender.class);
+    public MockitoComponentMockingRule<PingSender> mocker =
+        new MockitoComponentMockingRule<PingSender>(DefaultPingSender.class);
 
     @Test
     public void sendPing() throws Exception

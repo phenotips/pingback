@@ -17,6 +17,8 @@
  */
 package org.phenotips.pingback.internal.client.data;
 
+import org.phenotips.pingback.internal.client.PingDataProvider;
+
 import org.xwiki.configuration.ConfigurationSource;
 import org.xwiki.test.mockito.MockitoComponentMockingRule;
 
@@ -47,8 +49,8 @@ import static org.mockito.Mockito.when;
 public class IPPingDataProviderTest
 {
     @Rule
-    public MockitoComponentMockingRule<IPPingDataProvider> mocker =
-        new MockitoComponentMockingRule<>(IPPingDataProvider.class);
+    public MockitoComponentMockingRule<PingDataProvider> mocker =
+        new MockitoComponentMockingRule<PingDataProvider>(IPPingDataProvider.class);
 
     private LocalTestServer server;
 

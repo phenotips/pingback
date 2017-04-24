@@ -17,6 +17,8 @@
  */
 package org.phenotips.pingback.internal.client.data;
 
+import org.phenotips.pingback.internal.client.PingDataProvider;
+
 import org.xwiki.query.Query;
 import org.xwiki.query.QueryFilter;
 import org.xwiki.query.QueryManager;
@@ -45,8 +47,8 @@ import static org.mockito.Mockito.when;
 public class PatientsPingDataProviderTest
 {
     @Rule
-    public MockitoComponentMockingRule<PatientsPingDataProvider> mocker =
-        new MockitoComponentMockingRule<>(PatientsPingDataProvider.class);
+    public MockitoComponentMockingRule<PingDataProvider> mocker =
+        new MockitoComponentMockingRule<PingDataProvider>(PatientsPingDataProvider.class);
 
     @Test
     public void testProvideMapping() throws Exception

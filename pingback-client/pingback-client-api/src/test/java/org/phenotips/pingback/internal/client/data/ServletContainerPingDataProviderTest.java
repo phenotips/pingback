@@ -17,6 +17,8 @@
  */
 package org.phenotips.pingback.internal.client.data;
 
+import org.phenotips.pingback.internal.client.PingDataProvider;
+
 import org.xwiki.component.util.ReflectionUtils;
 import org.xwiki.environment.internal.ServletEnvironment;
 import org.xwiki.test.mockito.MockitoComponentMockingRule;
@@ -40,8 +42,8 @@ import static org.mockito.Mockito.when;
 public class ServletContainerPingDataProviderTest
 {
     @Rule
-    public MockitoComponentMockingRule<ServletContainerPingDataProvider> mocker =
-        new MockitoComponentMockingRule<>(ServletContainerPingDataProvider.class);
+    public MockitoComponentMockingRule<PingDataProvider> mocker =
+        new MockitoComponentMockingRule<PingDataProvider>(ServletContainerPingDataProvider.class);
 
     @Test
     public void provideMapping() throws Exception
