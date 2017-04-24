@@ -38,7 +38,7 @@ import org.slf4j.Logger;
 
 import io.searchbox.client.JestResult;
 import io.searchbox.core.Search;
-import io.searchbox.params.SearchType;
+import io.searchbox.params.Parameters;
 
 /**
  * Provide the date of the first ping and the elapsed days since the first ping. We do that to make it simpler to
@@ -100,7 +100,7 @@ public class DatePingDataProvider implements PingDataProvider
             Search search = new Search.Builder(constructSearchJSON(instanceId))
                 .addIndex(JestClientManager.INDEX)
                 .addType(JestClientManager.TYPE)
-                .setSearchType(SearchType.COUNT)
+                .setParameter(Parameters.SIZE, 0)
                 .build();
             JestResult result = this.jestClientManager.getClient().execute(search);
 
