@@ -79,7 +79,7 @@ public class PatientsPingDataProvider implements PingDataProvider
         try {
             Query q = this.qm.createQuery(
                 "from doc.object(PhenoTips.PatientClass) as patient "
-                    + "where patient.name<>'PhenoTips.PatientTemplate'",
+                    + "where doc.fullName<>'PhenoTips.PatientTemplate'",
                 Query.XWQL);
             List<Object> results = q.addFilter(this.countFilter).execute();
             long count = (long) results.get(0);
