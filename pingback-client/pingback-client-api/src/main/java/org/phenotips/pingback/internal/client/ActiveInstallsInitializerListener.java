@@ -64,11 +64,11 @@ public class ActiveInstallsInitializerListener implements EventListener
 
     /**
      * Used to send the ping to the remote instance.
-     * <p/>
+     * <p>
      * Note that we use a Provider since the Observation Manager will register listeners very early in the
      * initialization process and some of the components injected transitively by the {@link InstanceIdManager}
      * implementation have initialization code that require an Execution Context to be available, which is not the case
-     * early one in XWiki's initialization since no HTTP request has been made yet...
+     * early on in XWiki's initialization since no HTTP request has been made yet...
      */
     @Inject
     private Provider<PingSender> pingSenderProvider;

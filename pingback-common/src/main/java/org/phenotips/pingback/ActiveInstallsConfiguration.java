@@ -18,6 +18,7 @@
 package org.phenotips.pingback;
 
 import org.xwiki.component.annotation.Role;
+import org.xwiki.stability.Unstable;
 
 /**
  * Configuration properties for the Active Installs module.
@@ -33,4 +34,11 @@ public interface ActiveInstallsConfiguration
      *         activity
      */
     String getPingInstanceURL();
+
+    /**
+     * @return the user agent to use when sending pings to the remote server
+     * @since 9.0RC1
+     */
+    @Unstable
+    String getUserAgent();
 }

@@ -17,6 +17,8 @@
  */
 package org.phenotips.pingback.internal;
 
+import org.phenotips.pingback.ActiveInstallsConfiguration;
+
 import org.apache.http.impl.client.HttpClientBuilder;
 
 import io.searchbox.client.JestClientFactory;
@@ -29,9 +31,22 @@ import io.searchbox.client.JestClientFactory;
  */
 public class XWikiJestClientFactory extends JestClientFactory
 {
+    private ActiveInstallsConfiguration configuration;
+
+    /**
+     * @param configuration the object from which to extract the user agent to use when sending HTTP request (pings) to
+     *            the remote server
+     */
+    public XWikiJestClientFactory(ActiveInstallsConfiguration configuration)
+    {
+        this.configuration = configuration;
+    }
+
     @Override
     protected HttpClientBuilder configureHttpClient(HttpClientBuilder builder)
     {
-        return builder.useSystemProperties();
+        HttpClientBuilder modifiedBuilder = builder.useSystemProperties();
+        modifiedBuilder.setUserAgent(this.configuration.getUserAgent());
+        return modifiedBuilder;
     }
 }

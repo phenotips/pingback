@@ -33,16 +33,16 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 /**
- * Unit tests for {@link ExtensionPingDataProvider}.
+ * Unit tests for {@link ExtensionsPingDataProvider}.
  *
  * @version $Id$
  * @since 6.1M1
  */
-public class ExtensionPingDataProviderTest
+public class ExtensionsPingDataProviderTest
 {
     @Rule
-    public MockitoComponentMockingRule<ExtensionPingDataProvider> mocker =
-        new MockitoComponentMockingRule<>(ExtensionPingDataProvider.class);
+    public MockitoComponentMockingRule<ExtensionsPingDataProvider> mocker =
+        new MockitoComponentMockingRule<>(ExtensionsPingDataProvider.class);
 
     @Test
     public void provideMapping() throws Exception

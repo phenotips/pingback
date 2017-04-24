@@ -25,11 +25,13 @@ import org.xwiki.extension.repository.CoreExtensionRepository;
 import org.xwiki.extension.version.Version;
 import org.xwiki.instance.InstanceIdManager;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.inject.Provider;
 import javax.inject.Singleton;
 
 /**
@@ -49,11 +51,17 @@ public class DistributionPingDataProvider implements PingDataProvider
 
     private static final String PROPERTY_DISTRIBUTION_ID = "distributionId";
 
+    private static final String PROPERTY_DISTRIBUTION_FEATURES = "distributionFeatures";
+
     @Inject
     private CoreExtensionRepository coreExtensionRepository;
 
+    /**
+     * Note that we use a Provider to make sure that the Instance Manager is initialized as late as possible (it
+     * requires the database to be ready for its initialization).
+     */
     @Inject
-    private InstanceIdManager instanceIdManager;
+    private Provider<InstanceIdManager> instanceIdManagerProvider;
 
     @Override
     public Map<String, Object> provideMapping()
@@ -66,6 +74,7 @@ public class DistributionPingDataProvider implements PingDataProvider
         propertiesMap.put(PROPERTY_INSTANCE_ID, map);
         propertiesMap.put(PROPERTY_DISTRIBUTION_VERSION, map);
         propertiesMap.put(PROPERTY_DISTRIBUTION_ID, map);
+        propertiesMap.put(PROPERTY_DISTRIBUTION_FEATURES, map);
 
         return propertiesMap;
     }
@@ -75,7 +84,7 @@ public class DistributionPingDataProvider implements PingDataProvider
     {
         Map<String, Object> jsonMap = new HashMap<>();
 
-        String instanceId = this.instanceIdManager.getInstanceId().toString();
+        String instanceId = this.instanceIdManagerProvider.get().getInstanceId().toString();
         jsonMap.put(PROPERTY_INSTANCE_ID, instanceId);
 
         CoreExtension distributionExtension = this.coreExtensionRepository.getEnvironmentExtension();
@@ -88,7 +97,12 @@ public class DistributionPingDataProvider implements PingDataProvider
             if (distributionVersion != null) {
                 jsonMap.put(PROPERTY_DISTRIBUTION_VERSION, distributionVersion.toString());
             }
+            Collection<String> features = distributionExtension.getFeatures();
+            if (!features.isEmpty()) {
+                jsonMap.put(PROPERTY_DISTRIBUTION_FEATURES, distributionExtension.getFeatures().toArray());
+            }
         }
+
         return jsonMap;
     }
 }
