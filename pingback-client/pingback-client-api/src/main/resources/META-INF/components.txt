@@ -4,6 +4,7 @@ org.phenotips.pingback.internal.client.data.DatabasePingDataProvider
 org.phenotips.pingback.internal.client.data.DatePingDataProvider
 org.phenotips.pingback.internal.client.data.DistributionPingDataProvider
 org.phenotips.pingback.internal.client.data.ExtensionsPingDataProvider
+org.phenotips.pingback.internal.client.data.FamiliesPingDataProvider
 org.phenotips.pingback.internal.client.data.IPPingDataProvider
 org.phenotips.pingback.internal.client.data.JavaPingDataProvider
 org.phenotips.pingback.internal.client.data.MemoryPingDataProvider
