@@ -24,16 +24,17 @@ import org.xwiki.test.mockito.MockitoComponentMockingRule;
 
 import java.io.IOException;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
+import org.apache.http.HttpHost;
 import org.apache.http.HttpRequest;
 import org.apache.http.HttpResponse;
 import org.apache.http.entity.StringEntity;
-import org.apache.http.localserver.LocalTestServer;
+import org.apache.http.localserver.LocalServerTestBase;
 import org.apache.http.protocol.HttpContext;
 import org.apache.http.protocol.HttpRequestHandler;
 import org.json.JSONObject;
 import org.junit.After;
-import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
@@ -45,28 +46,21 @@ import static org.mockito.Mockito.when;
  *
  * @version: $Id$
  */
-public class IPPingDataProviderTest
+public class IPPingDataProviderTest extends LocalServerTestBase
 {
     @Rule
     public MockitoComponentMockingRule<PingDataProvider> mocker =
         new MockitoComponentMockingRule<PingDataProvider>(IPPingDataProvider.class);
 
-    private LocalTestServer server;
-
-    private String serverURL;
-
-    @Before
-    public void before() throws Exception
-    {
-        this.server = new LocalTestServer(null, null);
-        this.server.start();
-        this.serverURL = "http:/" + this.server.getServiceAddress();
-    }
-
     @After
-    public void after() throws Exception
+    @Override
+    public void shutDown() throws Exception
     {
-        this.server.stop();
+        if (this.server != null) {
+            this.server.shutdown(100, TimeUnit.MILLISECONDS);
+            this.server = null;
+        }
+        super.shutDown();
     }
 
     @Test
@@ -79,7 +73,7 @@ public class IPPingDataProviderTest
     @Test
     public void testProvideData() throws Exception
     {
-        this.server.register("/*", new HttpRequestHandler()
+        this.serverBootstrap.registerHandler("/*", new HttpRequestHandler()
         {
             @Override
             public void handle(HttpRequest request, HttpResponse response, HttpContext context)
@@ -89,9 +83,11 @@ public class IPPingDataProviderTest
             }
         });
 
+        HttpHost host = super.start();
+
         ConfigurationSource configuration = this.mocker.getInstance(ConfigurationSource.class);
         when(configuration.getProperty(IPPingDataProvider.IP_FETCH_URL_PROPERTY))
-            .thenReturn(this.serverURL + "/get/Stats/Id");
+            .thenReturn(host.toURI() + "/get/Stats/Id");
 
         Map<String, Object> actual = this.mocker.getComponentUnderTest().provideData();
         JSONAssert.assertEquals("{\"ip\":\"192.168.1.1\"}",
