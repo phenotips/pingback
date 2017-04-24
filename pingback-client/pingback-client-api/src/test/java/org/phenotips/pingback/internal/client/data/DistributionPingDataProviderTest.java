@@ -66,8 +66,8 @@ public class DistributionPingDataProviderTest
         ExtensionId environmentExtensionId = new ExtensionId("environmentextensionid", "2.0");
         CoreExtension environmentExtension = mock(CoreExtension.class);
         when(environmentExtension.getId()).thenReturn(environmentExtensionId);
-        CoreExtensionRepository CoreExtensionRepository = this.mocker.getInstance(CoreExtensionRepository.class);
-        when(CoreExtensionRepository.getEnvironmentExtension()).thenReturn(environmentExtension);
+        CoreExtensionRepository coreExtensionRepository = this.mocker.getInstance(CoreExtensionRepository.class);
+        when(coreExtensionRepository.getEnvironmentExtension()).thenReturn(environmentExtension);
 
         JSONAssert.assertEquals("{\"distributionId\":\"environmentextensionid\","
             + "\"distributionVersion\":\"2.0\","

@@ -57,8 +57,8 @@ public class DatePingDataProviderTest
     @Test
     public void provideMapping() throws Exception
     {
-        JSONAssert.assertEquals(
-            "{\"timestamp\":{\"type\":\"date\"},\"sinceDays\":{\"type\":\"long\"},\"firstPingDate\":{\"type\":\"date\"}}",
+        JSONAssert.assertEquals("{\"timestamp\":{\"type\":\"date\"},\"sinceDays\":{\"type\":\"long\"},"
+            + "\"firstPingDate\":{\"type\":\"date\"}}",
             new JSONObject(this.mocker.getComponentUnderTest().provideMapping()), false);
     }
 
@@ -71,28 +71,28 @@ public class DatePingDataProviderTest
 
         JestClient client = mock(JestClient.class);
         SearchResult searchResult = new SearchResult(new Gson());
-        String resultString = "{\n" +
-            "   \"took\": 4,\n" +
-            "   \"timed_out\": false,\n" +
-            "   \"_shards\": {\n" +
-            "      \"total\": 5,\n" +
-            "      \"successful\": 5,\n" +
-            "      \"failed\": 0\n" +
-            "   },\n" +
-            "   \"hits\": {\n" +
-            "      \"total\": 2,\n" +
-            "      \"max_score\": 0,\n" +
-            "      \"hits\": []\n" +
-            "   },\n" +
-            "   \"aggregations\": {\n" +
-            "      \"firstPingDate\": {\n" +
-            "         \"value\": 1392854400000\n" +
-            "      },\n" +
-            "      \"serverTime\": {\n" +
-            "         \"value\": 1393200000000\n" +
-            "      }\n" +
-            "   }\n" +
-            "}";
+        String resultString = "{\n"
+            + "   \"took\": 4,\n"
+            + "   \"timed_out\": false,\n"
+            + "   \"_shards\": {\n"
+            + "      \"total\": 5,\n"
+            + "      \"successful\": 5,\n"
+            + "      \"failed\": 0\n"
+            + "   },\n"
+            + "   \"hits\": {\n"
+            + "      \"total\": 2,\n"
+            + "      \"max_score\": 0,\n"
+            + "      \"hits\": []\n"
+            + "   },\n"
+            + "   \"aggregations\": {\n"
+            + "      \"firstPingDate\": {\n"
+            + "         \"value\": 1392854400000\n"
+            + "      },\n"
+            + "      \"serverTime\": {\n"
+            + "         \"value\": 1393200000000\n"
+            + "      }\n"
+            + "   }\n"
+            + "}";
         searchResult.setJsonString(resultString);
         searchResult.setJsonObject(new JsonParser().parse(resultString).getAsJsonObject());
         searchResult.setSucceeded(true);

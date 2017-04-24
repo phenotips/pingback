@@ -23,6 +23,7 @@ import org.xwiki.component.annotation.Component;
 import org.xwiki.configuration.ConfigurationSource;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -88,7 +89,8 @@ public class IPPingDataProvider implements PingDataProvider
             RequestConfig config = RequestConfig.custom().setSocketTimeout(2000).build();
             method.setConfig(config);
             response = this.client.execute(method);
-            JSONObject obj = new JSONObject(IOUtils.toString(response.getEntity().getContent()));
+            JSONObject obj =
+                new JSONObject(IOUtils.toString(response.getEntity().getContent(), StandardCharsets.UTF_8));
 
             if (obj.has(PROPERTY_IP)) {
                 jsonMap.put(PROPERTY_IP, obj.get(PROPERTY_IP));

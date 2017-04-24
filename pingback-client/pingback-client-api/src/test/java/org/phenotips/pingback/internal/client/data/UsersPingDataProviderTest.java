@@ -25,7 +25,6 @@ import org.xwiki.query.QueryManager;
 import org.xwiki.query.internal.DefaultQuery;
 import org.xwiki.test.mockito.MockitoComponentMockingRule;
 
-import java.util.ArrayList;
 import java.util.Collections;
 
 import org.json.JSONObject;
@@ -61,7 +60,7 @@ public class UsersPingDataProviderTest
     {
         Query q = mock(DefaultQuery.class);
         when(q.addFilter(any(QueryFilter.class))).thenReturn(q);
-        when(q.execute()).thenReturn(new ArrayList(Collections.singleton(12L)));
+        when(q.execute()).thenReturn(Collections.<Object>singletonList(12L));
 
         QueryManager qm = this.mocker.getInstance(QueryManager.class);
         when(qm.createQuery(anyString(), anyString())).thenReturn(q);
