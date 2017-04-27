@@ -21,7 +21,7 @@
   <parent>
     <groupId>org.phenotips</groupId>
     <artifactId>pingback</artifactId>
-    <version>1.2-SNAPSHOT</version>
+    <version>1.2</version>
   </parent>
   <artifactId>pingback-common</artifactId>
   <name>PhenoTips - PingBack - Common API</name>
