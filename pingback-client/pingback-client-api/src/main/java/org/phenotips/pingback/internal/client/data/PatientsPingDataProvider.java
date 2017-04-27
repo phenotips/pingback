@@ -24,6 +24,8 @@ import org.xwiki.query.Query;
 import org.xwiki.query.QueryException;
 import org.xwiki.query.QueryFilter;
 import org.xwiki.query.QueryManager;
+import org.xwiki.wiki.descriptor.WikiDescriptorManager;
+import org.xwiki.wiki.manager.WikiManagerException;
 
 import java.util.HashMap;
 import java.util.List;
@@ -59,6 +61,9 @@ public class PatientsPingDataProvider implements PingDataProvider
     @Named("count")
     private QueryFilter countFilter;
 
+    @Inject
+    private WikiDescriptorManager wikiManager;
+
     @Override
     public Map<String, Object> provideMapping()
     {
@@ -81,10 +86,16 @@ public class PatientsPingDataProvider implements PingDataProvider
                 "from doc.object(PhenoTips.PatientClass) as patient "
                     + "where doc.fullName<>'PhenoTips.PatientTemplate'",
                 Query.XWQL);
-            List<Object> results = q.addFilter(this.countFilter).execute();
-            long count = (long) results.get(0);
+            q.addFilter(this.countFilter);
+            long count = 0;
+            for (String instanceId : this.wikiManager.getAllIds()) {
+                q.setWiki(instanceId);
+                List<Object> results = q.execute();
+                long instanceCount = (long) results.get(0);
+                count += instanceCount;
+            }
             jsonMap.put(PROPERTY_PATIENT_COUNT, count);
-        } catch (QueryException e) {
+        } catch (QueryException | WikiManagerException e) {
             logWarning("Error getting patient count", e);
         }
 

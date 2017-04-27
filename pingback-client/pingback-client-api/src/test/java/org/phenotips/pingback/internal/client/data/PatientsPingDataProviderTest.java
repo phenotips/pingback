@@ -25,7 +25,9 @@ import org.xwiki.query.QueryFilter;
 import org.xwiki.query.QueryManager;
 import org.xwiki.query.internal.DefaultQuery;
 import org.xwiki.test.mockito.MockitoComponentMockingRule;
+import org.xwiki.wiki.descriptor.WikiDescriptorManager;
 
+import java.util.Arrays;
 import java.util.Collections;
 
 import org.json.JSONObject;
@@ -56,23 +58,30 @@ public class PatientsPingDataProviderTest
             new JSONObject(this.mocker.getComponentUnderTest().provideMapping()), false);
     }
 
+    @SuppressWarnings("unchecked")
     @Test
     public void testProvideData() throws Exception
     {
+        WikiDescriptorManager wdm = this.mocker.getInstance(WikiDescriptorManager.class);
+        when(wdm.getAllIds()).thenReturn(Arrays.asList("xwiki", "gc"));
+
         Query q = mock(DefaultQuery.class);
         when(q.addFilter(any(QueryFilter.class))).thenReturn(q);
-        when(q.execute()).thenReturn(Collections.<Object>singletonList(12L));
+        when(q.execute()).thenReturn(Collections.<Object>singletonList(12L), Collections.<Object>singletonList(30L));
 
         QueryManager qm = this.mocker.getInstance(QueryManager.class);
         when(qm.createQuery(anyString(), anyString())).thenReturn(q);
 
-        JSONAssert.assertEquals("{\"patients\":12}",
+        JSONAssert.assertEquals("{\"patients\":42}",
             new JSONObject(this.mocker.getComponentUnderTest().provideData()), false);
     }
 
     @Test
     public void queryExceptionReturnsEmptyData() throws Exception
     {
+        WikiDescriptorManager wdm = this.mocker.getInstance(WikiDescriptorManager.class);
+        when(wdm.getAllIds()).thenReturn(Arrays.asList("xwiki"));
+
         Query q = mock(DefaultQuery.class);
         when(q.addFilter(any(QueryFilter.class))).thenReturn(q);
         when(q.execute()).thenThrow(new QueryException("failed", q, null));
