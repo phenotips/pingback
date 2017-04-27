@@ -80,6 +80,6 @@ public class FamiliesPingDataProviderTest
         QueryManager qm = this.mocker.getInstance(QueryManager.class);
         when(qm.createQuery(anyString(), anyString())).thenReturn(q);
 
-        JSONAssert.assertEquals("{}", new JSONObject(this.mocker.getComponentUnderTest().provideData()), false);
+        JSONAssert.assertEquals("{}", new JSONObject(this.mocker.getComponentUnderTest().provideData()), true);
     }
 }

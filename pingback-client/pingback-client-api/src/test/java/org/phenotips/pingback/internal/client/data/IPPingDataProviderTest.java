@@ -115,7 +115,7 @@ public class IPPingDataProviderTest extends LocalServerTestBase
             .thenReturn(host.toURI() + "/get/Stats/Id");
 
         Map<String, Object> actual = this.mocker.getComponentUnderTest().provideData();
-        JSONAssert.assertEquals("{}", new JSONObject(actual), false);
+        JSONAssert.assertEquals("{}", new JSONObject(actual), true);
     }
 
     @Test
