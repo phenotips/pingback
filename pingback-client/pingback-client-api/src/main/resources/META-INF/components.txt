@@ -12,3 +12,4 @@ org.phenotips.pingback.internal.client.data.OsPingDataProvider
 org.phenotips.pingback.internal.client.data.PatientsPingDataProvider
 org.phenotips.pingback.internal.client.data.ServletContainerPingDataProvider
 org.phenotips.pingback.internal.client.data.UsersPingDataProvider
+org.phenotips.pingback.internal.client.data.VirtualInstancesPingDataProvider
