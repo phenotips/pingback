@@ -23,6 +23,7 @@ import org.xwiki.component.annotation.Component;
 import org.xwiki.configuration.ConfigurationSource;
 
 import java.io.IOException;
+import java.net.InetAddress;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
@@ -58,6 +59,10 @@ public class IPPingDataProvider implements PingDataProvider
 
     private static final String PROPERTY_IP = "ip";
 
+    private static final String PROPERTY_DOMAIN_NAME = "domainName";
+
+    private static final String PROPERTY_HOST_NAME = "hostName";
+
     @Inject
     private Logger logger;
 
@@ -74,6 +79,12 @@ public class IPPingDataProvider implements PingDataProvider
 
         Map<String, Object> propertiesMap = new HashMap<>();
         propertiesMap.put(PROPERTY_IP, map);
+
+        map = new HashMap<>();
+        map.put("type", "string");
+        map.put("index", "not_analyzed");
+        propertiesMap.put(PROPERTY_DOMAIN_NAME, map);
+        propertiesMap.put(PROPERTY_HOST_NAME, map);
 
         return propertiesMap;
     }
@@ -99,6 +110,10 @@ public class IPPingDataProvider implements PingDataProvider
             if (obj.has(PROPERTY_IP)) {
                 jsonMap.put(PROPERTY_IP, obj.get(PROPERTY_IP));
             }
+            if (obj.has(PROPERTY_DOMAIN_NAME)) {
+                jsonMap.put(PROPERTY_DOMAIN_NAME, obj.get(PROPERTY_DOMAIN_NAME));
+            }
+            jsonMap.put(PROPERTY_HOST_NAME, InetAddress.getLocalHost().getHostName());
         } catch (Exception e) {
             logWarning("Making IP request failed.", e);
         } finally {
@@ -120,5 +135,4 @@ public class IPPingDataProvider implements PingDataProvider
         this.logger.warn("{}. This information has not been added to the Active Installs ping data. Reason [{}]",
             explanation, ExceptionUtils.getRootCauseMessage(e), e);
     }
-
 }
