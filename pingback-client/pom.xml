@@ -21,7 +21,7 @@
   <parent>
     <groupId>org.phenotips</groupId>
     <artifactId>pingback</artifactId>
-    <version>1.3-SNAPSHOT</version>
+    <version>1.3</version>
   </parent>
   <artifactId>pingback-client</artifactId>
   <name>PhenoTips - PingBack - Client - Parent POM</name>
