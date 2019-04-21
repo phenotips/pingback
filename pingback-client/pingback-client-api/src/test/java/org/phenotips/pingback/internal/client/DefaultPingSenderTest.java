@@ -25,7 +25,6 @@ import org.junit.Rule;
 import org.junit.Test;
 
 import com.google.gson.Gson;
-
 import io.searchbox.client.JestClient;
 import io.searchbox.core.DocumentResult;
 import io.searchbox.core.Index;
