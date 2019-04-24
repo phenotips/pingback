@@ -59,6 +59,87 @@
       <groupId>javax.servlet</groupId>
       <artifactId>javax.servlet-api</artifactId>
     </dependency>
+    <dependency>
+      <groupId>org.xwiki.commons</groupId>
+      <artifactId>xwiki-commons-environment-servlet</artifactId>
+      <version>${xwiki.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.xwiki.commons</groupId>
+      <artifactId>xwiki-commons-component-api</artifactId>
+      <version>${xwiki.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.xwiki.commons</groupId>
+      <artifactId>xwiki-commons-configuration-api</artifactId>
+      <version>${xwiki.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.xwiki.commons</groupId>
+      <artifactId>xwiki-commons-context</artifactId>
+      <version>${xwiki.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.xwiki.platform</groupId>
+      <artifactId>xwiki-platform-wiki-api</artifactId>
+      <version>${xwiki.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.httpcomponents</groupId>
+      <artifactId>httpcore</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.searchbox</groupId>
+      <artifactId>jest-common</artifactId>
+      <version>2.4.0</version>
+    </dependency>
+    <dependency>
+      <groupId>com.google.code.gson</groupId>
+      <artifactId>gson</artifactId>
+      <version>2.6.2</version>
+    </dependency>
+    <dependency>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+    </dependency>
+
+
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.httpcomponents</groupId>
+      <artifactId>httpclient</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.xwiki.platform</groupId>
+      <artifactId>xwiki-platform-bridge</artifactId>
+      <version>${xwiki.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.xwiki.commons</groupId>
+      <artifactId>xwiki-commons-environment-api</artifactId>
+      <version>${xwiki.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.xwiki.commons</groupId>
+      <artifactId>xwiki-commons-observation-api</artifactId>
+      <version>${xwiki.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.xwiki.platform</groupId>
+      <artifactId>xwiki-platform-query-manager</artifactId>
+      <version>${xwiki.version}</version>
+    </dependency>
+
     <!-- Test Dependencies -->
     <dependency>
       <groupId>com.github.tomakehurst</groupId>
@@ -95,6 +176,12 @@
       <version>4.5.2</version>
       <classifier>tests</classifier>
       <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit-dep</artifactId>
+      <scope>test</scope>
+      <version>4.10</version>
     </dependency>
   </dependencies>
 </project>

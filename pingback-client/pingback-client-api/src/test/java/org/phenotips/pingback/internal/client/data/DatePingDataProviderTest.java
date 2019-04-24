@@ -34,7 +34,6 @@ import org.skyscreamer.jsonassert.JSONAssert;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonParser;
-
 import io.searchbox.client.JestClient;
 import io.searchbox.core.Search;
 import io.searchbox.core.SearchResult;
