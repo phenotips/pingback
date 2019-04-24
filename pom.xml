@@ -24,7 +24,7 @@
     <version>1.4.5</version>
   </parent>
   <artifactId>pingback</artifactId>
-  <version>1.4</version>
+  <version>1.5-SNAPSHOT</version>
   <name>PingBack - Parent POM</name>
   <packaging>pom</packaging>
   <description>Parent POM for the PingBack modules</description>
@@ -81,8 +81,4 @@
       </dependency>
     </dependencies>
   </dependencyManagement>
-
-  <scm>
-    <tag>phenotips-pingback-1.4</tag>
-  </scm>
 </project>
